@@ -15,4 +15,8 @@ const image = {
   marginLeft: "15px",
 };
 
+const mainContainer = {
+  flexDirection: "column-reverse",
+};
+
 export { image, heading, appBar };

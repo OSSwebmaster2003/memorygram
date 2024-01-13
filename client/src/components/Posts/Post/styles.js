@@ -46,6 +46,10 @@ const cardActions = {
   display: "flex",
   justifyContent: "space-between",
 };
+const flexCenter = {
+  display: "flex",
+  alignItems: "center",
+};
 
 export {
   media,
@@ -58,4 +62,5 @@ export {
   details,
   title,
   cardActions,
+  flexCenter,
 };

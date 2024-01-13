@@ -13,7 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../../actions/posts";
+import { deletePost, likePost } from "../../../actions/posts";
 
 import {
   media,
@@ -26,6 +26,7 @@ import {
   details,
   title,
   cardActions,
+  flexCenter,
 } from "./styles";
 
 const Post = ({ post, setCurrentId }) => {
@@ -43,39 +44,39 @@ const Post = ({ post, setCurrentId }) => {
         <Button
           style={{ color: "white" }}
           size="small"
-          onClick={() => {
-            setCurrentId(post._id);
-          }}
+          onClick={() => setCurrentId(post._id)}
         >
           <MoreHorizIcon fontSize="default" />
         </Button>
       </Box>
       <Box component="div" sx={details}>
-        <Typography variant="body2" color="textSecondary">
+        <Typography variant="body2" color="textSecondary" component="h2">
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </Box>
-      <Typography sx={title} variant="h5" gutter="bottom">
+      <Typography sx={title} gutterBottom variant="h5" component="h2">
         {post.title}
       </Typography>
       <CardContent>
-        <Typography variant="h5" gutter="bottom">
+        <Typography variant="body2" color="textSecondary" component="p">
           {post.message}
         </Typography>
       </CardContent>
       <CardActions sx={cardActions}>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(likePost(post._id))}
+        >
           <ThumbUpAltIcon fontSize="small" />
-          Like
-          {post.likeCount}
+          &nbsp; Like &nbsp; {post.likeCount}{" "}
         </Button>
         <Button
           size="small"
           color="primary"
           onClick={() => dispatch(deletePost(post._id))}
         >
-          <DeleteIcon fontSize="small" />
-          Delete
+          <DeleteIcon fontSize="small" /> Delete
         </Button>
       </CardActions>
     </Card>
