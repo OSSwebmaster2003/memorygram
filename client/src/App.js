@@ -1,6 +1,6 @@
 import { Container, AppBar, Typography, Grow, Grid, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import memoriesImg from "./images/memories.png";
 
 import { getPosts } from "./actions/posts";
@@ -10,11 +10,12 @@ import Form from "./components/Form/Form";
 import { appBar, heading, image } from "./styles";
 
 const App = () => {
+  const [currentId, setCurrentId] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch]);
+  }, [currentId, dispatch]);
   return (
     <Container maxWidth="lg">
       <AppBar sx={appBar} position="static" color="inherit">
@@ -38,10 +39,10 @@ const App = () => {
             spacing={3}
           >
             <Grid item xs={12} sm={7}>
-              <Posts />
+              <Posts setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Form />
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>

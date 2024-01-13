@@ -26,7 +26,7 @@ import {
   cardActions,
 } from "./styles";
 
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentId }) => {
   return (
     <Card sx={card}>
       <CardMedia sx={media} image={post.selectedFile} title={post.title} />
@@ -37,7 +37,13 @@ const Post = ({ post }) => {
         </Typography>
       </Box>
       <Box component="div" sx={overlay2}>
-        <Button style={{ color: "white" }} size="small" onClick={() => {}}>
+        <Button
+          style={{ color: "white" }}
+          size="small"
+          onClick={() => {
+            setCurrentId(post._id);
+          }}
+        >
           <MoreHorizIcon fontSize="default" />
         </Button>
       </Box>
@@ -46,8 +52,11 @@ const Post = ({ post }) => {
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </Box>
+      <Typography sx={title} variant="h5" gutter="bottom">
+        {post.title}
+      </Typography>
       <CardContent>
-        <Typography sx={title} variant="h5" gutter="bottom">
+        <Typography variant="h5" gutter="bottom">
           {post.message}
         </Typography>
       </CardContent>
