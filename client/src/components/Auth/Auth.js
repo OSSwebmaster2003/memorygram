@@ -15,16 +15,36 @@ import {
 import LockClockOutlinedIcon from "@mui/icons-material/LockClockOutlined";
 
 import Input from "./Input";
+import { signup, signin } from "../../actions/auth";
+
 import { avatar, paper, submit, heading } from "./styles";
 
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [form, setForm] = useState(initialState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignUp) {
+      dispatch(signup(form, navigate));
+    } else {
+      dispatch(signin(form, navigate));
+    }
+  };
+
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
@@ -32,8 +52,7 @@ const Auth = () => {
 
   const switchMode = () => {
     setIsSignUp((prev) => !prev);
-    handleShowPassword(false);
-    //! that above must be mistake
+    setShowPassword(false);
   };
 
   const googleSuccess = async (res) => {
