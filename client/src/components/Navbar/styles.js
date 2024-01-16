@@ -35,6 +35,12 @@ const brandContainer = {
 };
 const logout = {
   padding: "10px",
+  backgroundColor: "red",
+  fontWeight: "bold",
+  "&:hover": {
+    backgroundColor: "inherit",
+    color: "red",
+  },
 };
 // const purple = {
 //   color: theme.palette.getContrastText(deepPurple[500]),

@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   AppBar,
   Typography,
@@ -23,14 +24,23 @@ import memoriesImg from "../../images/memories.png";
 
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  console.log(user);
+  const logoutUser = () => {
+    dispatch({ type: "LOGOUT" });
+
+    navigate("/");
+
+    setUser(null);
+  };
 
   useEffect(() => {
     const token = user?.token;
 
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, []);
+  }, [location]);
 
   return (
     <AppBar sx={appBar} position="static" color="inherit">
@@ -65,7 +75,7 @@ const Navbar = () => {
               variant="contained"
               sx={logout}
               color="secondary"
-              onClick={() => {}}
+              onClick={logoutUser}
             >
               Logout
             </Button>
