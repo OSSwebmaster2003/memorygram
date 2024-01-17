@@ -43,8 +43,9 @@ const Navbar = () => {
     if (token) {
       const decodedToken = jwtDecode(token);
 
-      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+      if (decodedToken.exp * 1000 < new Date().getTime()) logoutUser();
     }
+
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 

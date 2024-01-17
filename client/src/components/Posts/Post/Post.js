@@ -33,11 +33,15 @@ import {
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
+  console.log(user);
+  console.log(post);
+  // console.log(post.likes);
 
   const Likes = () => {
-    if (post.likes.length > 0) {
+    if (post?.likes?.length > 0) {
       return post.likes.find(
-        (like) => like === (user?.result?.googleId || user?.result?._id)
+        // (like) => like === (user?.result?.googleId || user?.result?._id)
+        (like) => like === (user?.result?.sub || user?.result?._id)
       ) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
@@ -61,6 +65,7 @@ const Post = ({ post, setCurrentId }) => {
       </>
     );
   };
+
   return (
     <Card sx={card}>
       <CardMedia sx={media} image={post.selectedFile} title={post.title} />
