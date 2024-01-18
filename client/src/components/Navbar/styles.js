@@ -10,10 +10,13 @@ const appBar = {
 const heading = {
   color: "rgba(0,183,255, 1)",
   textDecoration: "none",
+  fontSize: "2em",
+  fontWeight: 300,
   cursor: "pointer",
 };
 const image = {
-  marginLeft: "15px",
+  marginLeft: "10px",
+  marginTop: "5px",
 };
 const toolbar = {
   display: "flex",
@@ -24,28 +27,27 @@ const profile = {
   display: "flex",
   justifyContent: "space-between",
   width: "400px",
+  alignItems: "center",
 };
 const userName = {
   display: "flex",
   alignItems: "center",
+  textAlign: "center",
 };
 const brandContainer = {
   display: "flex",
   alignItems: "center",
 };
 const logout = {
-  padding: "10px",
-  backgroundColor: "red",
-  fontWeight: "bold",
-  "&:hover": {
-    backgroundColor: "inherit",
-    color: "red",
-  },
+  marginLeft: "20px",
+  // padding: "10px",
+  // backgroundColor: "red",
+  // fontWeight: "bold",
+  // "&:hover": {
+  //   backgroundColor: "inherit",
+  //   color: "red",
+  // },
 };
-// const purple = {
-//   color: theme.palette.getContrastText(deepPurple[500]),
-//   backgroundColor: deepPurple[500],
-// };
 
 export {
   appBar,

@@ -18,29 +18,22 @@ import { deletePost, likePost } from "../../../actions/posts";
 
 import {
   media,
-  border,
-  fullHeightCard,
   card,
   overlay,
   overlay2,
-  grid,
   details,
   title,
   cardActions,
-  flexCenter,
 } from "./styles";
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
-  console.log(user);
-  console.log(post);
   // console.log(post.likes);
 
   const Likes = () => {
     if (post?.likes?.length > 0) {
       return post.likes.find(
-        // (like) => like === (user?.result?.googleId || user?.result?._id)
         (like) => like === (user?.result?.sub || user?.result?._id)
       ) ? (
         <>
@@ -67,7 +60,7 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   return (
-    <Card sx={card}>
+    <Card sx={card} raised elevation={6}>
       <CardMedia sx={media} image={post.selectedFile} title={post.title} />
       <Box component="div" sx={overlay}>
         <Typography variant="h6">{post.name}</Typography>

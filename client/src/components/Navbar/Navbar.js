@@ -21,7 +21,8 @@ import {
   logout,
 } from "./styles";
 
-import memoriesImg from "../../images/memories.png";
+import memoriesLogo from "../../images/memories-Logo.png";
+import memoriesText from "../../images/memories-Text.png";
 
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -47,28 +48,28 @@ const Navbar = () => {
     }
 
     setUser(JSON.parse(localStorage.getItem("profile")));
+
+    //eslint-disable-next-line
   }, [location]);
 
   return (
     <AppBar sx={appBar} position="static" color="inherit">
-      <Box sx={brandContainer}>
-        <Typography
-          component={Link}
-          to="/"
-          sx={heading}
-          variant="h2"
-          align="center"
-        >
-          Memories
-        </Typography>
+      <Link to="/" sx={brandContainer}>
+        <Box
+          // sx={memoriesText}
+          component="img"
+          src={memoriesText}
+          alt="icon"
+          height="45px"
+        />
         <Box
           sx={image}
           component="img"
-          src={memoriesImg}
-          alt="memories"
-          height={60}
+          src={memoriesLogo}
+          alt="logo"
+          height="40px"
         />
-      </Box>
+      </Link>
       <Toolbar sx={toolbar}>
         {user ? (
           <Box component="div" sx={profile}>
