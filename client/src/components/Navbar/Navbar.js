@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import {
   appBar,
-  heading,
   image,
   brandContainer,
   toolbar,

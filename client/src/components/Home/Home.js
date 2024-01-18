@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { MuiChipsInput } from "mui-chips-input";
 
@@ -6,7 +6,7 @@ import Posts from "../../components/Posts/Posts";
 import Form from "../../components/Form/Form";
 import Paginate from "../Pagination/Pagination";
 import { useDispatch } from "react-redux";
-import { getPosts, getPostsBySearch } from "../../actions/posts";
+import { getPostsBySearch } from "../../actions/posts";
 
 import {
   Container,
@@ -21,7 +21,7 @@ import {
 import { appBar, pagination } from "./styles";
 
 function useQuery() {
-  return new URLSearchParams(useLocation.search);
+  return new URLSearchParams(useLocation().search);
 }
 
 const Home = () => {
@@ -35,15 +35,9 @@ const Home = () => {
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
-
   const searchPost = () => {
     if (search.trim() || tags) {
-      // dispatch search posts
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
-
       navigate(
         `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
       );
@@ -69,7 +63,6 @@ const Home = () => {
     <Grow in>
       <Container maxWidth="xl">
         <Grid
-          // sx={classes.gridContainer}
           container
           justifyContent="space-between"
           alignItems="stretch"
@@ -79,17 +72,11 @@ const Home = () => {
             <Posts setCurrentId={setCurrentId} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <AppBar
-              sx={appBar}
-              // className={ClassNames.appbar}
-              position="static"
-              color="inherit"
-            >
+            <AppBar sx={appBar} position="static" color="inherit">
               <TextField
                 name="search"
                 variant="outlined"
                 label="Search Memories"
-                // onKeyPress={handleKeyPress}
                 onKeyUp={handleKeyPress}
                 fullWidth
                 value={search}
@@ -98,11 +85,8 @@ const Home = () => {
               <MuiChipsInput
                 sx={{ margin: "10px 0" }}
                 value={tags}
-                // onAdd={handleAdd}
-                // onDelete={handleDelete}
                 onAddChip={(chip) => handleAddChip(chip)}
                 onDeleteChip={(chip) => handleDeleteChip(chip)}
-                // onChange={handleAdd}
                 label="Search Tags"
                 variant="outlined"
               />
@@ -111,13 +95,11 @@ const Home = () => {
               </Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-            <Paper
-              // sx={pagination}
-              sx={pagination}
-              elevation={6}
-            >
-              <Paginate />
-            </Paper>
+            {!searchQuery && !tags.length && (
+              <Paper sx={pagination} elevation={6}>
+                <Paginate page={page} />
+              </Paper>
+            )}
           </Grid>
         </Grid>
       </Container>

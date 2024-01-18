@@ -40,13 +40,6 @@ const brandContainer = {
 };
 const logout = {
   marginLeft: "20px",
-  // padding: "10px",
-  // backgroundColor: "red",
-  // fontWeight: "bold",
-  // "&:hover": {
-  //   backgroundColor: "inherit",
-  //   color: "red",
-  // },
 };
 
 export {
