@@ -6,7 +6,7 @@ import { deletePost, likePost } from "../../../actions/posts";
 
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import EditIcon from "@mui/icons-material/Edit";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 import {
@@ -35,6 +35,8 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile"));
+
+  console.log(user);
 
   const openPost = () => {
     navigate(`/posts/${post._id}`);
@@ -78,15 +80,14 @@ const Post = ({ post, setCurrentId }) => {
             {moment(post.createdAt).fromNow()}
           </Typography>
         </Box>
-        {(user?.result?.googleId === post?.creator ||
+        {(user?.result?.sub === post?.creator ||
           user?.result?._id === post?.creator) && (
           <Box component="div" sx={overlay2}>
             <Button
               style={{ color: "white" }}
-              size="small"
               onClick={() => setCurrentId(post._id)}
             >
-              <MoreHorizIcon fontSize="default" />
+              <EditIcon fontSize="default" />
             </Button>
           </Box>
         )}
@@ -113,12 +114,15 @@ const Post = ({ post, setCurrentId }) => {
         >
           <Likes />
         </Button>
-        {(user?.result?.googleId === post?.creator ||
+        {(user?.result?.sub === post?.creator ||
           user?.result?._id === post?.creator) && (
           <Button
             size="small"
-            color="primary"
-            onClick={() => dispatch(deletePost(post._id))}
+            sx={{ color: "red" }}
+            onClick={() => {
+              dispatch(deletePost(post._id));
+              navigate("/");
+            }}
           >
             <DeleteIcon fontSize="small" /> Delete
           </Button>

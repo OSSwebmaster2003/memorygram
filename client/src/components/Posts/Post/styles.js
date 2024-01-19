@@ -26,9 +26,10 @@ const overlay = {
 };
 const overlay2 = {
   position: "absolute",
-  top: "20px",
-  right: "20px",
+  top: "5px",
+  right: "-15px",
   color: "white",
+  zIndex: "100",
 };
 const grid = {
   display: "flex",

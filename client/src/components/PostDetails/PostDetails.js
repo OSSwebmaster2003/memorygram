@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { UseDispatch, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { getPost } from "../../actions/posts";
+import { getPost, getPostsBySearch } from "../../actions/posts";
 
 import {
   Paper,
@@ -12,7 +12,14 @@ import {
   Box,
   Divider,
 } from "@mui/material";
-import { card, imageSection, loadingPaper, media, section } from "./styles";
+import {
+  card,
+  imageSection,
+  loadingPaper,
+  media,
+  section,
+  recommendedPosts,
+} from "./styles";
 
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
@@ -20,13 +27,29 @@ const PostDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const openPost = (id) => {
+    navigate(`/posts/${id}`);
+  };
+
   useEffect(() => {
     dispatch(getPost(id));
 
     // eslint-disable-next-line
   }, [id]);
 
-  if (!post) return <>No Post Found </>;
+  useEffect(() => {
+    if (post) {
+      dispatch(
+        getPostsBySearch({ search: "none", tags: post?.tags.join(",") })
+      );
+    }
+
+    //eslint-disable-next-line
+  }, [post]);
+
+  const recommendedposts = posts.filter(({ _id }) => _id !== post?._id);
+
+  if (!post) return null;
 
   if (isLoading) {
     return (
@@ -80,7 +103,39 @@ const PostDetails = () => {
           />
         </Box>
       </Box>
-      {/* Recommended posts  */}
+      {recommendedposts.length && (
+        <Box sx={section}>
+          <Typography gutterBottom variant="h5">
+            You might also like:
+          </Typography>
+          <Divider />
+          <Box sx={recommendedPosts}>
+            {recommendedposts.map(
+              ({ title, message, name, likes, selectedFile, _id }) => (
+                <Box
+                  key={_id}
+                  sx={{ margin: "20px", cursor: "pointer" }}
+                  onClick={() => openPost(_id)}
+                >
+                  <Typography gutterBottom variant="h6">
+                    {title}
+                  </Typography>
+                  <Typography gutterBottom variant="subtitle2">
+                    {name}
+                  </Typography>
+                  <Typography gutterBottom variant="subtitle2">
+                    {message}
+                  </Typography>
+                  <Typography gutterBottom variant="subtitle1">
+                    Likes: {likes.length}
+                  </Typography>
+                  <Box component="img" src={selectedFile} width="200px" />
+                </Box>
+              )
+            )}
+          </Box>
+        </Box>
+      )}
     </Paper>
   );
 };

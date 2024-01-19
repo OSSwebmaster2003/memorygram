@@ -3,53 +3,59 @@ import { TextField, Button, Paper, Typography, Box } from "@mui/material";
 import FileBase from "react-file-base64";
 import { buttonSubmit, fileInput, paper, root } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createPost, updatePost } from "../../actions/posts";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
-    tags: "",
+    tags: [],
     selectedFile: "",
   });
   const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => p._id === currentId) : null
+    currentId
+      ? state.posts.posts.find((message) => message._id === currentId)
+      : null
   );
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (post) {
-      setPostData(post);
-    }
-  }, [post]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (currentId) {
-      dispatch(
-        updatePost(currentId, { ...postData, name: user?.result?.name })
-      );
-    } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }));
-    }
-
-    clear();
-  };
   const clear = () => {
-    setCurrentId(null);
+    setCurrentId(0);
     setPostData({
       title: "",
       message: "",
-      tags: "",
+      tags: [],
       selectedFile: "",
     });
   };
 
+  useEffect(() => {
+    if (!post?.title) clear();
+    if (post) setPostData(post);
+
+    //eslint-disable-next-line
+  }, [post]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (currentId === 0) {
+      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
+      clear();
+    } else {
+      dispatch(
+        updatePost(currentId, { ...postData, name: user?.result?.name })
+      );
+      clear();
+    }
+  };
+
   if (!user?.result?.name) {
     return (
-      <Paper sx={paper}>
+      <Paper sx={paper} elevation={6}>
         <Typography variant="h6" align="center">
           Please login to create your own memories and like others'
         </Typography>
