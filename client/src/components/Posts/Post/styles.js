@@ -46,6 +46,10 @@ const cardActions = {
   display: "flex",
   justifyContent: "space-between",
 };
+const cardAction = {
+  display: "block",
+  textAlign: "initial",
+};
 const flexCenter = {
   display: "flex",
   alignItems: "center",
@@ -62,5 +66,6 @@ export {
   details,
   title,
   cardActions,
+  cardAction,
   flexCenter,
 };
