@@ -36,8 +36,6 @@ const Post = ({ post, setCurrentId }) => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile"));
 
-  console.log(user);
-
   const openPost = () => {
     navigate(`/posts/${post._id}`);
   };
@@ -71,40 +69,40 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   return (
-    <Card sx={card} raised elevation={6}>
-      <ButtonBase sx={cardAction} onClick={openPost}>
-        <CardMedia sx={media} image={post.selectedFile} title={post.title} />
-        <Box component="div" sx={overlay}>
-          <Typography variant="h6">{post.name}</Typography>
-          <Typography variant="body2">
-            {moment(post.createdAt).fromNow()}
-          </Typography>
+    <Card component="div" sx={card} raised elevation={6}>
+      <CardMedia sx={media} image={post.selectedFile} title={post.title} />
+      <Box component="div" sx={overlay}>
+        <Typography variant="h6">{post.name}</Typography>
+        <Typography variant="body2">
+          {moment(post.createdAt).fromNow()}
+        </Typography>
+      </Box>
+      {(user?.result?.sub === post?.creator ||
+        user?.result?._id === post?.creator) && (
+        <Box component="div" sx={overlay2}>
+          <Button
+            style={{ color: "white" }}
+            onClick={() => setCurrentId(post._id)}
+          >
+            <EditIcon fontSize="default" />
+          </Button>
         </Box>
-        {(user?.result?.sub === post?.creator ||
-          user?.result?._id === post?.creator) && (
-          <Box component="div" sx={overlay2}>
-            <Button
-              style={{ color: "white" }}
-              onClick={() => setCurrentId(post._id)}
-            >
-              <EditIcon fontSize="default" />
-            </Button>
-          </Box>
-        )}
-        <Box component="div" sx={details}>
-          <Typography variant="body2" color="textSecondary" component="h2">
-            {post.tags.map((tag) => `#${tag} `)}
-          </Typography>
-        </Box>
+      )}
+      <Box component="div" sx={details}>
+        <Typography variant="body2" color="textSecondary" component="h2">
+          {post.tags.map((tag) => `#${tag} `)}
+        </Typography>
+      </Box>
+      <ButtonBase sx={cardAction} component="span" onClick={openPost}>
         <Typography sx={title} gutterBottom variant="h5" component="h2">
           {post.title}
         </Typography>
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {post.message}
-          </Typography>
-        </CardContent>
       </ButtonBase>
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {post.message}
+        </Typography>
+      </CardContent>
       <CardActions sx={cardActions}>
         <Button
           size="small"
