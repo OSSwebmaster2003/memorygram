@@ -1,26 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { TextField, Button, Paper, Typography, Box } from "@mui/material";
-import FileBase from "react-file-base64";
-import { buttonSubmit, fileInput, paper, root } from "./styles";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import FileBase from "react-file-base64";
+
 import { createPost, updatePost } from "../../actions/posts";
 
-const Form = ({ currentId, setCurrentId }) => {
+import { TextField, Button, Paper, Typography, Box } from "@mui/material";
+
+const CreateMemory = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
     tags: [],
     selectedFile: "",
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("profile"));
+
   const post = useSelector((state) =>
     currentId
       ? state.posts.posts.find((message) => message._id === currentId)
       : null
   );
-  const user = JSON.parse(localStorage.getItem("profile"));
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const clear = () => {
     setCurrentId(0);
@@ -49,23 +51,14 @@ const Form = ({ currentId, setCurrentId }) => {
       dispatch(
         updatePost(currentId, { ...postData, name: user?.result?.name })
       );
+      navigate("/posts");
       clear();
     }
   };
 
-  if (!user?.result?.name) {
-    return (
-      <Paper sx={paper} elevation={6}>
-        <Typography variant="h6" align="center">
-          Please login to create your own memories and like others'
-        </Typography>
-      </Paper>
-    );
-  }
   return (
-    <Paper sx={paper}>
+    <Paper>
       <Box
-        sx={root}
         component="form"
         autoComplete="off"
         noValidate
@@ -95,6 +88,7 @@ const Form = ({ currentId, setCurrentId }) => {
         />
         <TextField
           name="tags"
+          placeholder="asia,china,fun"
           variant="outlined"
           label="Tags"
           fullWidth
@@ -103,7 +97,7 @@ const Form = ({ currentId, setCurrentId }) => {
             setPostData({ ...postData, tags: e.target.value.split(",") })
           }
         />
-        <Box sx={fileInput}>
+        <Box>
           <FileBase
             type="file"
             multiple={false}
@@ -113,7 +107,6 @@ const Form = ({ currentId, setCurrentId }) => {
           />
         </Box>
         <Button
-          sx={buttonSubmit}
           variant="contained"
           color="primary"
           size="large"
@@ -123,7 +116,6 @@ const Form = ({ currentId, setCurrentId }) => {
           Submit
         </Button>
         <Button
-          sx={buttonSubmit}
           variant="contained"
           color="secondary"
           size="small"
@@ -137,4 +129,4 @@ const Form = ({ currentId, setCurrentId }) => {
   );
 };
 
-export default Form;
+export default CreateMemory;

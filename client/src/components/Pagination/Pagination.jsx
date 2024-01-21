@@ -21,7 +21,8 @@ const Paginate = ({ page }) => {
         display: "flex",
         alignItems: "center",
         width: "100%",
-        justifyContent: "space-around",
+        gap: "15px",
+        justifyContent: "flex-end",
       }}
       count={numberOfPages}
       page={Number(page) || 1}

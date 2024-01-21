@@ -35,6 +35,7 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile"));
+  const userId = user?.result?.sub || user?.result?._id;
 
   const openPost = () => {
     navigate(`/posts/${post._id}`);
@@ -42,9 +43,7 @@ const Post = ({ post, setCurrentId }) => {
 
   const Likes = () => {
     if (post?.likes?.length > 0) {
-      return post.likes.find(
-        (like) => like === (user?.result?.sub || user?.result?._id)
-      ) ? (
+      return post.likes.find((like) => like === userId) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
           &nbsp;
@@ -82,7 +81,10 @@ const Post = ({ post, setCurrentId }) => {
         <Box component="div" sx={overlay2}>
           <Button
             style={{ color: "white" }}
-            onClick={() => setCurrentId(post._id)}
+            onClick={() => {
+              setCurrentId(post._id);
+              navigate("/posts/create");
+            }}
           >
             <EditIcon fontSize="default" />
           </Button>
