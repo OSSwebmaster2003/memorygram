@@ -5,6 +5,8 @@ import { Pagination, PaginationItem } from "@mui/material";
 
 import { getPosts } from "../../actions/posts";
 
+import { paginationWrapper } from "./styles";
+
 const Paginate = ({ page }) => {
   const { numberOfPages } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
@@ -17,17 +19,12 @@ const Paginate = ({ page }) => {
 
   return (
     <Pagination
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-        gap: "15px",
-        justifyContent: "flex-end",
-      }}
+      sx={paginationWrapper}
       count={numberOfPages}
       page={Number(page) || 1}
-      variant="outlined"
-      color="primary"
+      variant="standard"
+      color="secondary"
+      shape="rounded"
       renderItem={(item) => (
         <PaginationItem
           {...item}
