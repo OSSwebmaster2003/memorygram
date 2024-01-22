@@ -1,11 +1,11 @@
 const appBar = {
-  borderRadius: 15,
-  margin: "30px 0",
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "10px 50px",
+  padding: "15px 50px",
+  backgroundColor: "#FFF",
+  marginBottom: "30px",
 };
 const heading = {
   color: "rgba(0,183,255, 1)",
@@ -19,27 +19,49 @@ const image = {
   marginTop: "5px",
 };
 const toolbar = {
+  gap: "15px",
   display: "flex",
   justifyContent: "flex-end",
-  width: "400px",
+  padding: "0",
 };
 const profile = {
+  gap: "20px",
   display: "flex",
   justifyContent: "space-between",
-  width: "400px",
   alignItems: "center",
-};
-const userName = {
-  display: "flex",
-  alignItems: "center",
-  textAlign: "center",
 };
 const brandContainer = {
   display: "flex",
   alignItems: "center",
 };
-const logout = {
-  marginLeft: "20px",
+const signInButton = {
+  height: "40px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "#FFB526",
+  borderRadius: "8px",
+  fontSize: "16px",
+  fontWeight: "600",
+  "&:hover": {
+    backgroundColor: "#FFB526",
+  },
+};
+const avatar = {
+  width: "40px",
+  height: "40px",
+  borderRadius: "50%",
+  cursor: "pointer",
+  backgroundColor: "red",
+  color: "#FFF",
+};
+const createButton = {
+  width: "40px",
+  height: "40px",
+  borderRadius: "50%",
+  cursor: "pointer",
+  backgroundColor: "#FFB526",
+  color: "#FFF",
 };
 
 export {
@@ -49,6 +71,7 @@ export {
   brandContainer,
   toolbar,
   profile,
-  userName,
-  logout,
+  signInButton,
+  avatar,
+  createButton,
 };

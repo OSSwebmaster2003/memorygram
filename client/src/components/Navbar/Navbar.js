@@ -2,24 +2,19 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
-import {
-  AppBar,
-  Typography,
-  Box,
-  Toolbar,
-  Avatar,
-  Button,
-} from "@mui/material";
+import { Box, Toolbar, Avatar, Button } from "@mui/material";
 import {
   appBar,
   image,
   brandContainer,
   toolbar,
   profile,
-  userName,
-  logout,
+  signInButton,
+  avatar,
+  createButton,
 } from "./styles";
 
+import AddIcon from "@mui/icons-material/Add";
 import memoriesLogo from "../../images/memories-Logo.png";
 import memoriesText from "../../images/memories-Text.png";
 
@@ -52,15 +47,9 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <AppBar sx={appBar} position="static" color="inherit">
+    <Box component="nav" sx={appBar} position="static" color="inherit">
       <Link to="/" sx={brandContainer}>
-        <Box
-          // sx={memoriesText}
-          component="img"
-          src={memoriesText}
-          alt="icon"
-          height="45px"
-        />
+        <Box component="img" src={memoriesText} alt="icon" height="45px" />
         <Box
           sx={image}
           component="img"
@@ -72,33 +61,31 @@ const Navbar = () => {
       <Toolbar sx={toolbar}>
         {user ? (
           <Box component="div" sx={profile}>
-            <Avatar alt={user?.result.name} src={user?.result.imageUrl}>
+            <Avatar component={Link} to="/posts/create" sx={createButton}>
+              <AddIcon />
+            </Avatar>
+            <Avatar
+              alt={user?.result.name}
+              src={user?.result.imageUrl}
+              width="40px"
+              height="40px"
+              sx={avatar}
+            >
               {user?.result.name.charAt(0)}
             </Avatar>
-            <Typography sx={userName} variant="h6">
-              {user?.result.name}
-            </Typography>
-            <Button
-              variant="contained"
-              sx={logout}
-              color="secondary"
-              onClick={logoutUser}
-            >
-              Logout
-            </Button>
           </Box>
         ) : (
           <Button
+            sx={signInButton}
             component={Link}
             to="/auth"
             variant="contained"
-            color="primary"
           >
             Sign In
           </Button>
         )}
       </Toolbar>
-    </AppBar>
+    </Box>
   );
 };
 

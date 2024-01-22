@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Container } from "@mui/material";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -8,14 +7,15 @@ import Home from "./pages/Home/Home";
 import Auth from "./components/Auth/Auth";
 import PostDetails from "./components/PostDetails/PostDetails";
 import CreateMemory from "./pages/CreateMemory/CreateMemory";
+import { Box } from "@mui/material";
 
 const App = () => {
   const [currentId, setCurrentId] = useState(null);
   const user = JSON.parse(localStorage.getItem("profile"));
   return (
     <BrowserRouter>
-      <Container maxWidth="xl">
-        <Navbar />
+      <Navbar />
+      <Box component="div" sx={{ padding: "0 50px" }}>
         <Routes>
           <Route path="/" element={<Navigate to="/posts" />} />
           <Route path="/posts" element={<Home setCurrentId={setCurrentId} />} />
@@ -39,7 +39,7 @@ const App = () => {
             }
           />
         </Routes>
-      </Container>
+      </Box>
     </BrowserRouter>
   );
 };
