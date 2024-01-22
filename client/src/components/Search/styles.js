@@ -5,7 +5,7 @@ const searchWrapper = {
   alignItems: "center",
   justifyContent: "space-between",
   gap: "25px",
-  padding: "10px 15px",
+  padding: "8px 8px 8px 20px",
   borderRadius: "10px",
 };
 const searchButton = {
@@ -13,11 +13,21 @@ const searchButton = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "150px",
-  height: "56px",
+  width: "288px",
+  height: "68px",
+  backgroundColor: "#E12020",
+  fontSize: "18px",
+  fontWeight: "600",
+  color: "#FFF",
+  "&:hover": {
+    backgroundColor: "#E12020",
+  },
 };
 const searchInput = {
   width: "calc((100% - 106px)/2)",
+  border: "none",
+  outline: "none",
+  boxShadow: "none",
 };
 
 export { searchWrapper, searchButton, searchInput };
