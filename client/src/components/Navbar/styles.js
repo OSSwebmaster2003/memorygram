@@ -4,8 +4,9 @@ const appBar = {
   justifyContent: "space-between",
   alignItems: "center",
   padding: "15px 50px",
-  backgroundColor: "#FFF",
+  backgroundColor: "inherit",
   marginBottom: "30px",
+  borderBottom: "1px solid #FFF",
 };
 const heading = {
   color: "rgba(0,183,255, 1)",
@@ -52,10 +53,16 @@ const avatar = {
   height: "40px",
   borderRadius: "50%",
   cursor: "pointer",
-  backgroundColor: "red",
-  color: "#FFF",
 };
 const createButton = {
+  width: "40px",
+  height: "40px",
+  borderRadius: "50%",
+  cursor: "pointer",
+  backgroundColor: "#FFB526",
+  color: "#FFF",
+};
+const notificationsButton = {
   width: "40px",
   height: "40px",
   borderRadius: "50%",
@@ -74,4 +81,5 @@ export {
   signInButton,
   avatar,
   createButton,
+  notificationsButton,
 };
