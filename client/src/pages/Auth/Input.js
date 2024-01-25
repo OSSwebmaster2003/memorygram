@@ -15,6 +15,7 @@ const Input = ({
   return (
     <Grid item xs={12} sm={half ? 6 : 12}>
       <TextField
+        autoComplete="new-password"
         name={name}
         onChange={handleChange}
         variant="outlined"
@@ -37,6 +38,7 @@ const Input = ({
             : null
         }
       />
+      <input type="text" style={{ display: "none" }} />
     </Grid>
   );
 };

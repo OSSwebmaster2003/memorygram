@@ -6,7 +6,6 @@ import AddIcon from "@mui/icons-material/Add";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 
 import {
-  avatar,
   createButton,
   notificationsButton,
   profile,
@@ -14,7 +13,9 @@ import {
   toolbar,
 } from "../styles";
 
-const Toolbar = ({ user }) => {
+import Dropdown from "../Dropdown/Dropdown";
+
+const Toolbar = ({ user, logout }) => {
   return (
     <Box component="div" sx={toolbar}>
       {user ? (
@@ -29,15 +30,7 @@ const Toolbar = ({ user }) => {
           >
             <NotificationsActiveIcon />
           </Avatar>
-          <Avatar
-            alt={user?.result.name}
-            src={user?.result.imageUrl}
-            width="40px"
-            height="40px"
-            sx={avatar}
-          >
-            {user?.result.name.charAt(0)}
-          </Avatar>
+          <Dropdown user={user} logout={logout} />
         </Box>
       ) : (
         <Button

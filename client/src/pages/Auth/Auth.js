@@ -77,7 +77,7 @@ const Auth = () => {
         <Typography variant="h5" sx={heading}>
           {isSignUp ? "Sign Up" : "Sign In"}
         </Typography>
-        <Box component="form" onSubmit={handleSubmit}>
+        <Box component="form" onSubmit={handleSubmit} autoComplete="off">
           <Grid container spacing={2}>
             {isSignUp && (
               <>

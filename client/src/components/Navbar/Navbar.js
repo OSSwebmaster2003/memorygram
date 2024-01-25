@@ -51,7 +51,7 @@ const Navbar = () => {
           height="40px"
         />
       </Link>
-      <Toolbar user={user} />
+      <Toolbar user={user} logout={logoutUser} />
     </Box>
   );
 };
