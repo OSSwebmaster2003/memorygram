@@ -44,6 +44,7 @@ const Search = () => {
       <AppBar sx={searchWrapper} position="static" color="inherit">
         <TextField
           sx={searchInput}
+          color="secondary"
           name="search"
           variant="outlined"
           label="Search Memories"
@@ -52,6 +53,7 @@ const Search = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
         <MuiChipsInput
+          color="secondary"
           sx={searchInput}
           hideClearAll
           value={tags}

@@ -17,6 +17,9 @@ const card = {
   borderRadius: "15px",
   height: "100%",
   position: "relative",
+  border: "2px solid white",
+  background: "transparent",
+  backdropFilter: "blur(5px)",
 };
 const overlay = {
   position: "absolute",
@@ -38,6 +41,7 @@ const details = {
   display: "flex",
   justifyContent: "space-between",
   margin: "20px",
+  color: "white",
 };
 const title = {
   padding: "0 16px",

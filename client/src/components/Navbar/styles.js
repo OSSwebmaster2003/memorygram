@@ -53,6 +53,7 @@ const avatar = {
   height: "40px",
   borderRadius: "50%",
   cursor: "pointer",
+  border: "2px solid orange",
 };
 const createButton = {
   width: "40px",

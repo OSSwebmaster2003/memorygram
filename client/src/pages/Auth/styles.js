@@ -1,68 +1,40 @@
-const authWrapper = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "50px",
-  height: "calc(100vh - 120px)",
-};
-const authImage = {
-  width: "200px",
-};
-const heading = {
-  color: "#FFF",
-  fontSize: "32px",
-  lineHeight: "125%",
-  fontWeight: "500",
-  marginBottom: "32px",
-};
-const authForm = {
-  width: "500px",
+const paper = {
+  marginTop: "32px",
   display: "flex",
   flexDirection: "column",
-  alignItems: "flex-start",
-  justifyContent: "flex-start",
-  gap: "24px",
-};
-const inputWrapper = {
-  width: "100%",
-};
-const inputField = {
-  width: "100%",
-  padding: "16px",
-  border: "1px solid #3d4554",
-  borderRadius: "24px",
-  background: "inherit",
-  color: "#FFF",
-};
-const submitButton = {
-  width: "100%",
-  background: "#F4C038",
-  borderRadius: "48px",
-  padding: "14px 24px",
-  display: "flex",
   alignItems: "center",
-  justifyContent: "center",
-  "&:hover": {
-    background: "#F4C038",
-  },
-  fontSize: "18px",
-  fontWeight: 500,
-  lineHeight: "22px",
+  padding: "8px",
+  borderRadius: "10px",
+  border: "2px solid white",
+  background: "transparent",
+  backdropFilter: "blur(8px)",
 };
-const switchButton = {
-  color: "#FFF",
+const root = {
+  "& .MuiTextField-root": {
+    margin: "4px",
+  },
+};
+const heading = {
+  marginBottom: "15px",
+};
+const switchMode = {
+  color: "#333",
   fontSize: "12px",
-  "&:hover": {
-    color: "#F4C038",
-  },
+  fontWeight: "700",
 };
-export {
-  authWrapper,
-  authImage,
-  heading,
-  authForm,
-  inputWrapper,
-  inputField,
-  submitButton,
-  switchButton,
+const avatar = {
+  margin: "4px",
+  backgroundColor: "purple",
 };
+const form = {
+  width: "100%", // Fix IE 11 issue.
+  marginTop: "12px",
+};
+const submit = {
+  margin: "12px  0  8px",
+};
+const googleButton = {
+  marginBottom: "8px",
+};
+
+export { paper, root, avatar, form, submit, googleButton, heading, switchMode };

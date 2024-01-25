@@ -45,24 +45,31 @@ const Post = ({ post, setCurrentId }) => {
     if (post?.likes?.length > 0) {
       return post.likes.find((like) => like === userId) ? (
         <>
-          <ThumbUpAltIcon fontSize="small" />
-          &nbsp;
-          {post.likes.length > 2
-            ? `You and ${post.likes.length - 1} others`
-            : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+          <ThumbUpAltIcon fontSize="small" sx={{ color: "red" }} />
+          <Box component="div" sx={{ color: "red" }}>
+            &nbsp;
+            {post.likes.length > 2
+              ? `You and ${post.likes.length - 1} others`
+              : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+          </Box>
         </>
       ) : (
         <>
-          <ThumbUpOffAltIcon fontSize="small" />
-          &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
+          <ThumbUpOffAltIcon fontSize="small" sx={{ color: "red" }} />
+          <Box component="div" sx={{ color: "red" }}>
+            &nbsp;{post.likes.length}{" "}
+            {post.likes.length === 1 ? "Like" : "Likes"}
+          </Box>
         </>
       );
     }
 
     return (
       <>
-        <ThumbUpOffAltIcon fontSize="small" />
-        &nbsp;Like
+        <ThumbUpOffAltIcon fontSize="small" sx={{ color: "red" }} />
+        <Box component="div" sx={{ color: "red" }}>
+          &nbsp;Like
+        </Box>
       </>
     );
   };
@@ -91,17 +98,29 @@ const Post = ({ post, setCurrentId }) => {
         </Box>
       )}
       <Box component="div" sx={details}>
-        <Typography variant="body2" color="textSecondary" component="h2">
+        <Typography
+          variant="body2"
+          color="black"
+          fontWeight={600}
+          component="h2"
+        >
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </Box>
       <ButtonBase sx={cardAction} component="span" onClick={openPost}>
-        <Typography sx={title} gutterBottom variant="h5" component="h2">
+        <Typography
+          sx={title}
+          gutterBottom
+          variant="h5"
+          component="h2"
+          color="white"
+          fontWeight={700}
+        >
           {post.title}
         </Typography>
       </ButtonBase>
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="subtitle1" color="black" component="p">
           {post.message}
         </Typography>
       </CardContent>

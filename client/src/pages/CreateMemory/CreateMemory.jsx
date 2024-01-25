@@ -6,6 +6,14 @@ import FileBase from "react-file-base64";
 import { createPost, updatePost } from "../../actions/posts";
 
 import { TextField, Button, Paper, Typography, Box } from "@mui/material";
+import {
+  wrapper,
+  form,
+  heading,
+  choosePicture,
+  submitBtn,
+  clearBtn,
+} from "./styles";
 
 const CreateMemory = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
@@ -57,15 +65,16 @@ const CreateMemory = ({ currentId, setCurrentId }) => {
   };
 
   return (
-    <Paper>
+    <Paper sx={wrapper}>
       <Box
+        sx={form}
         component="form"
         autoComplete="off"
         noValidate
         action=""
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">
+        <Typography variant="h6" sx={heading}>
           {currentId ? `Editing` : `Creating`} a Memory
         </Typography>
         <TextField
@@ -80,6 +89,8 @@ const CreateMemory = ({ currentId, setCurrentId }) => {
           name="message"
           variant="outlined"
           label="Message"
+          rows="7"
+          multiline
           fullWidth
           value={postData.message}
           onChange={(e) =>
@@ -97,7 +108,7 @@ const CreateMemory = ({ currentId, setCurrentId }) => {
             setPostData({ ...postData, tags: e.target.value.split(",") })
           }
         />
-        <Box>
+        <Box sx={choosePicture}>
           <FileBase
             type="file"
             multiple={false}
@@ -107,21 +118,19 @@ const CreateMemory = ({ currentId, setCurrentId }) => {
           />
         </Box>
         <Button
+          sx={submitBtn}
           variant="contained"
-          color="primary"
-          size="large"
           type="submit"
-          fullWidth
+          disabled={
+            !postData.title ||
+            !postData.message ||
+            !postData.tags ||
+            !postData.selectedFile
+          }
         >
           Submit
         </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          size="small"
-          onClick={clear}
-          fullWidth
-        >
+        <Button sx={clearBtn} variant="contained" onClick={clear}>
           Clear
         </Button>
       </Box>

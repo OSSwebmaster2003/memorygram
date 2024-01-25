@@ -5,7 +5,11 @@ import { commentPost } from "../../actions/posts";
 
 import { Typography, TextField, Button, Box } from "@mui/material";
 
-import { commentsInnerContainer, commentsOuterContainer } from "./styles";
+import {
+  commentButton,
+  commentsInnerContainer,
+  commentsOuterContainer,
+} from "./styles";
 
 const CommentSection = ({ post }) => {
   const [comments, setComments] = useState(post?.comments);
@@ -43,7 +47,7 @@ const CommentSection = ({ post }) => {
           <div ref={commentsRef} />
         </Box>
         {user?.result?.name && (
-          <Box sx={{ width: "70%" }}>
+          <Box sx={{ width: "400px" }}>
             <Typography gutterBottom variant="h6">
               Leave a comment
             </Typography>
@@ -57,10 +61,9 @@ const CommentSection = ({ post }) => {
               onChange={(e) => setComment(e.target.value)}
             />
             <Button
-              sx={{ marginTop: "10px" }}
+              sx={commentButton}
               fullWidth
               disabled={!comment}
-              color="primary"
               variant="contained"
               onClick={handleSubmit}
             >

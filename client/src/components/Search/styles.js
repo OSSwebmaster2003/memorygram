@@ -7,6 +7,8 @@ const searchWrapper = {
   gap: "25px",
   padding: "8px 8px 8px 20px",
   borderRadius: "10px",
+  background: "transparent",
+  backdropFilter: "blur(5px)",
 };
 const searchButton = {
   cursor: "pointer",
@@ -28,6 +30,7 @@ const searchInput = {
   border: "none",
   outline: "none",
   boxShadow: "none",
+  color: "red",
 };
 
 export { searchWrapper, searchButton, searchInput };

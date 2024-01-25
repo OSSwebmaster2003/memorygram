@@ -14,6 +14,7 @@ import {
   Divider,
 } from "@mui/material";
 import {
+  wrapper,
   card,
   imageSection,
   loadingPaper,
@@ -62,7 +63,7 @@ const PostDetails = () => {
     );
   }
   return (
-    <Paper style={{ padding: "20px", borderRadius: "15px" }} elevation={6}>
+    <Paper sx={wrapper} elevation={6}>
       <Box component="div" sx={card}>
         <Box component="div" sx={section}>
           <Typography variant="h3" component="h2">
@@ -88,11 +89,10 @@ const PostDetails = () => {
             <strong>Realtime Chat - coming soon!</strong>
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
-          <CommentSection post={post} />
-          <Divider style={{ margin: "20px 0" }} />
         </Box>
         <Box component="div" sx={imageSection}>
-          <img
+          <Box
+            component="img"
             sx={media}
             src={
               post.selectedFile ||
@@ -102,6 +102,8 @@ const PostDetails = () => {
           />
         </Box>
       </Box>
+      <CommentSection post={post} />
+
       {recommendedposts.length && (
         <Box sx={section}>
           <Typography gutterBottom variant="h5">

@@ -3,12 +3,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-
-import logoImage from "../../images/memories-Logo.png";
-
-import Input from "./Input";
-import { signup, signin } from "../../actions/auth";
-
 import {
   Avatar,
   Button,
@@ -18,17 +12,12 @@ import {
   Container,
   Box,
 } from "@mui/material";
-import {
-  authImage,
-  authWrapper,
-  heading,
-  authForm,
-  inputWrapper,
-  submitButton,
-  switchButton,
-} from "./styles";
+import LockClockOutlinedIcon from "@mui/icons-material/LockClockOutlined";
 
-import { AUTH } from "../../constants/actionTypes";
+import Input from "./Input";
+import { signup, signin } from "../../actions/auth";
+
+import { avatar, paper, submit, heading } from "./styles";
 
 const initialState = {
   firstName: "",
@@ -37,7 +26,6 @@ const initialState = {
   password: "",
   confirmPassword: "",
 };
-
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
@@ -73,71 +61,70 @@ const Auth = () => {
     const result = decoded;
 
     try {
-      dispatch({ type: AUTH, data: { result, token } });
+      dispatch({ type: "AUTH", data: { result, token } });
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
-    <Container component="main" sx={authWrapper}>
-      <Box>
-        <Box component="img" src={logoImage} sx={authImage} />
-      </Box>
-      <Box>
+    <Container component="main" maxWidth="xs">
+      <Paper sx={paper} elevation={3}>
+        <Avatar sx={avatar}>
+          <LockClockOutlinedIcon />
+        </Avatar>
         <Typography variant="h5" sx={heading}>
           {isSignUp ? "Sign Up" : "Sign In"}
         </Typography>
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          sx={authForm}
-          autoComplete="off"
-        >
-          {isSignUp && (
-            <Box component="div" sx={inputWrapper}>
-              <Input
-                name="firstName"
-                label="First Name"
-                placeholder="First Name"
-                handleChange={handleChange}
-                autoFocus
-              />
-              <Input
-                sx={{ marginTop: "24px" }}
-                name="lastName"
-                label="Last Name"
-                placeholder="Last Name"
-                handleChange={handleChange}
-              />
-            </Box>
-          )}
-          <Input
-            sx={inputWrapper}
-            name="email"
-            label="Emal Address"
-            placeholder="Email Address"
-            handleChange={handleChange}
-            type="email"
-          />
-          <Input
-            name="password"
-            label="Password"
-            placeholder="Password"
-            handleChange={handleChange}
-            type={showPassword ? "text" : "password"}
-            handleShowPassword={handleShowPassword}
-          />
-          {isSignUp && (
+        <Box component="form" onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            {isSignUp && (
+              <>
+                <Input
+                  name="firstName"
+                  label="First Name"
+                  handleChange={handleChange}
+                  half
+                  autoFocus
+                />
+                <Input
+                  name="lastName"
+                  label="Last Name"
+                  handleChange={handleChange}
+                  half
+                />
+              </>
+            )}
             <Input
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              label="Repeat Password"
+              name="email"
+              label="Email Address"
               handleChange={handleChange}
-              type="password"
+              type="email"
             />
-          )}
-          <Button type="submit" fullWidth variant="contained" sx={submitButton}>
+            <Input
+              name="password"
+              label="Password"
+              handleChange={handleChange}
+              type={showPassword ? "text" : "password"}
+              handleShowPassword={handleShowPassword}
+            />
+            {isSignUp && (
+              <Input
+                name="confirmPassword"
+                label="Repeat Password"
+                handleChange={handleChange}
+                type="password"
+              />
+            )}
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            sx={submit}
+          >
             {isSignUp ? "Sign Up" : "Sign In"}
           </Button>
           <Box
@@ -157,7 +144,14 @@ const Auth = () => {
           </Box>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Button sx={switchButton} onClick={switchMode}>
+              <Button
+                sx={{
+                  color: "black",
+                  letterSpacing: "1.2",
+                  fontSize: "12px",
+                }}
+                onClick={switchMode}
+              >
                 {isSignUp
                   ? "Already have an account? Sign In"
                   : "Don't have an account? Sign Up"}
@@ -165,7 +159,7 @@ const Auth = () => {
             </Grid>
           </Grid>
         </Box>
-      </Box>
+      </Paper>
     </Container>
   );
 };
