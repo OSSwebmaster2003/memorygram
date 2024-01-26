@@ -101,6 +101,7 @@ const Auth = () => {
               label="Email Address"
               handleChange={handleChange}
               type="email"
+              autoFocus={!isSignUp}
             />
             <Input
               name="password"
@@ -118,24 +119,23 @@ const Auth = () => {
               />
             )}
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={submit}
-          >
+          <Button type="submit" fullWidth variant="contained" sx={submit}>
             {isSignUp ? "Sign Up" : "Sign In"}
           </Button>
           <Box
             sx={{
               marginBottom: "10px",
-              width: "100%",
+              width: "376px",
               display: "flex",
+              alignItems: "center",
               justifyContent: "center",
+              padding: "0",
+              margin: "0",
             }}
           >
             <GoogleLogin
+              size="large"
+              theme="outline"
               onSuccess={googleSuccess}
               onError={() => {
                 console.log("Login Failed");

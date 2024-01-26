@@ -29,6 +29,7 @@ import {
   title,
   cardActions,
   cardAction,
+  truncatedString,
 } from "./styles";
 
 const Post = ({ post, setCurrentId }) => {
@@ -45,8 +46,8 @@ const Post = ({ post, setCurrentId }) => {
     if (post?.likes?.length > 0) {
       return post.likes.find((like) => like === userId) ? (
         <>
-          <ThumbUpAltIcon fontSize="small" sx={{ color: "red" }} />
-          <Box component="div" sx={{ color: "red" }}>
+          <ThumbUpAltIcon fontSize="small" sx={{ color: "#2E364B" }} />
+          <Box component="div" sx={{ color: "#2E364B" }}>
             &nbsp;
             {post.likes.length > 2
               ? `You and ${post.likes.length - 1} others`
@@ -55,8 +56,8 @@ const Post = ({ post, setCurrentId }) => {
         </>
       ) : (
         <>
-          <ThumbUpOffAltIcon fontSize="small" sx={{ color: "red" }} />
-          <Box component="div" sx={{ color: "red" }}>
+          <ThumbUpOffAltIcon fontSize="small" sx={{ color: "#2E364B" }} />
+          <Box component="div" sx={{ color: "#2E364B" }}>
             &nbsp;{post.likes.length}{" "}
             {post.likes.length === 1 ? "Like" : "Likes"}
           </Box>
@@ -66,8 +67,8 @@ const Post = ({ post, setCurrentId }) => {
 
     return (
       <>
-        <ThumbUpOffAltIcon fontSize="small" sx={{ color: "red" }} />
-        <Box component="div" sx={{ color: "red" }}>
+        <ThumbUpOffAltIcon fontSize="small" sx={{ color: "#2E364B" }} />
+        <Box component="div" sx={{ color: "#2E364B" }}>
           &nbsp;Like
         </Box>
       </>
@@ -120,7 +121,12 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </ButtonBase>
       <CardContent>
-        <Typography variant="subtitle1" color="black" component="p">
+        <Typography
+          variant="subtitle1"
+          color="black"
+          component="p"
+          sx={truncatedString}
+        >
           {post.message}
         </Typography>
       </CardContent>

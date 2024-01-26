@@ -31,7 +31,18 @@ const form = {
   marginTop: "12px",
 };
 const submit = {
-  margin: "12px  0  8px",
+  margin: "16px 0",
+  width: "100%",
+  height: "45px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "#FFB526",
+  "&:hover": {
+    backgroundColor: "#FFB526",
+  },
+  fontSize: "16px",
+  fontWeight: "600",
 };
 const googleButton = {
   marginBottom: "8px",

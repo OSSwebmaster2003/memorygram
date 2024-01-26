@@ -59,6 +59,13 @@ const flexCenter = {
   display: "flex",
   alignItems: "center",
 };
+const truncatedString = {
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  display: "-webkit-box",
+  WebkitLineClamp: "5",
+  WebkitBoxOrient: "vertical",
+};
 
 export {
   media,
@@ -73,4 +80,5 @@ export {
   cardActions,
   cardAction,
   flexCenter,
+  truncatedString,
 };
