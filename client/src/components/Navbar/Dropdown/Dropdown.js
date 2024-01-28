@@ -19,6 +19,8 @@ const Dropdown = ({ user, logout }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
 
+  const username = user?.result?.username;
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -58,7 +60,7 @@ const Dropdown = ({ user, logout }) => {
       >
         <MenuItem
           onClick={() => {
-            navigate("/profile");
+            navigate(`/${username}`);
             handleClose();
           }}
         >

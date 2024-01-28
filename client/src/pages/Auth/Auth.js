@@ -22,6 +22,7 @@ import { avatar, paper, submit, heading } from "./styles";
 const initialState = {
   firstName: "",
   lastName: "",
+  username: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -93,6 +94,11 @@ const Auth = () => {
                   label="Last Name"
                   handleChange={handleChange}
                   half
+                />
+                <Input
+                  name="username"
+                  label="Username"
+                  handleChange={handleChange}
                 />
               </>
             )}

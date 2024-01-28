@@ -11,4 +11,5 @@ export const START_LOADING = "START_LOADING";
 export const END_LOADING = "ENG_LOADING";
 
 export const AUTH = "AUTH";
+export const GET_PROFILE = "GET_PROFILE";
 export const LOGOUT = "LOGOUT";

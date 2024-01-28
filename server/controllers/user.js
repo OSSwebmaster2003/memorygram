@@ -30,7 +30,7 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const { email, password, firstName, lastName } = req.body;
+  const { email, password, firstName, lastName, username } = req.body;
 
   try {
     const oldUser = await UserModal.findOne({ email });
@@ -44,6 +44,7 @@ export const signup = async (req, res) => {
       email,
       password: hashedPassword,
       name: `${firstName} ${lastName}`,
+      username,
     });
 
     const token = jwt.sign({ email: result.email, id: result._id }, secret, {
@@ -51,6 +52,24 @@ export const signup = async (req, res) => {
     });
 
     res.status(201).json({ result, token });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+
+    console.log(error);
+  }
+};
+
+export const visitProfile = async (req, res) => {
+  const { username } = req.params;
+
+  try {
+    const user = await UserModal.find({ username });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
 

@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import Auth from "./pages/Auth/Auth";
 import PostDetails from "./pages/PostDetails/PostDetails";
 import CreateMemory from "./pages/CreateMemory/CreateMemory";
+import Profile from "./pages/Profile/Profile";
 import { Box } from "@mui/material";
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
             path="/auth"
             element={user ? <Navigate to="/posts" /> : <Auth />}
           />
+          <Route path="/:username" element={<Profile user={user} />} />
           <Route
             path="/posts/create"
             element={
