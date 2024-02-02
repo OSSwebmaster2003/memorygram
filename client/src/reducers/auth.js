@@ -4,6 +4,7 @@ import {
   GET_PROFILE,
   START_LOADING,
   END_LOADING,
+  SAVE_PROFILE_INFO,
 } from "../constants/actionTypes.js";
 
 const authReducer = (state = { authData: null, isLoading: true }, action) => {
@@ -22,6 +23,12 @@ const authReducer = (state = { authData: null, isLoading: true }, action) => {
         authData: action.data,
         loading: false,
         errors: null,
+      };
+    case SAVE_PROFILE_INFO:
+      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
+      return {
+        ...state,
+        authData: action.data,
       };
     case LOGOUT:
       localStorage.clear();

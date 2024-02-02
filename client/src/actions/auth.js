@@ -2,6 +2,7 @@ import {
   AUTH,
   END_LOADING,
   GET_PROFILE,
+  SAVE_PROFILE_INFO,
   START_LOADING,
 } from "../constants/actionTypes";
 import * as api from "../api/index.js";
@@ -40,3 +41,22 @@ export const visitProfile = (username) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const saveProfileInfo =
+  (form, username, navigate) => async (dispatch) => {
+    try {
+      dispatch({ type: START_LOADING });
+
+      const { data } = await api.saveProfileInfo(username, form);
+
+      console.log(data);
+
+      dispatch({ type: SAVE_PROFILE_INFO, data });
+
+      navigate(`/${username}`);
+
+      dispatch({ type: END_LOADING });
+    } catch (error) {
+      console.log(error);
+    }
+  };

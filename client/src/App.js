@@ -8,6 +8,7 @@ import PostDetails from "./pages/PostDetails/PostDetails";
 import CreateMemory from "./pages/CreateMemory/CreateMemory";
 import Profile from "./pages/Profile/Profile";
 import { Box } from "@mui/material";
+import Settings from "./pages/Settings/Settings";
 
 const App = () => {
   const [currentId, setCurrentId] = useState(null);
@@ -26,6 +27,10 @@ const App = () => {
             element={user ? <Navigate to="/posts" /> : <Auth />}
           />
           <Route path="/:username" element={<Profile user={user} />} />
+          <Route
+            path="/:username/settings"
+            element={<Settings user={user} />}
+          />
           <Route
             path="/posts/create"
             element={

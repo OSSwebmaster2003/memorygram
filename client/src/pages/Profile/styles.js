@@ -71,8 +71,8 @@ const bottomPart = {
   gap: "50px",
 };
 const defaultImageWrapper = {
-  width: "440px",
-  height: "540px",
+  width: "100%",
+  height: "400px",
   background: "#191E2E",
   borderRadius: "15px",
   display: "flex",

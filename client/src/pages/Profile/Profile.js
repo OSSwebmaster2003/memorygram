@@ -82,7 +82,9 @@ const Profile = ({ user }) => {
           {userInfo?.birthday && (
             <Box sx={tableRowWrapper}>
               <Box sx={dialogue}>Birthday:</Box>
-              <Box sx={answerDialogue}>{userInfo.birthday}</Box>
+              <Box sx={answerDialogue}>
+                {userInfo.birthday.substring(0, 10)}
+              </Box>
             </Box>
           )}
           {userInfo?.country && (

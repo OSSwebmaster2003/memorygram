@@ -33,6 +33,7 @@ const SocialMedia = ({ userInfo }) => {
         (link) =>
           link.link && (
             <Box
+              key={link.link}
               sx={{
                 width: "30px",
                 height: "30px",

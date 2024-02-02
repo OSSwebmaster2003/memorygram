@@ -40,13 +40,13 @@ const Dropdown = ({ user, logout }) => {
         onClick={handleClick}
       >
         <Avatar
-          alt={user?.result.name}
-          src={user?.result.imageUrl}
+          alt={user?.result?.name}
+          src={user?.result?.imageUrl}
           width="40px"
           height="40px"
           sx={avatar}
         >
-          {user?.result.name.charAt(0)}
+          {user?.result?.name.charAt(0)}
         </Avatar>
       </Box>
       <Menu

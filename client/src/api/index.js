@@ -30,3 +30,5 @@ export const comment = (value, id) =>
 export const signin = (formData) => API.post("/user/signin", formData);
 export const signup = (formData) => API.post("/user/signup", formData);
 export const visitProfile = (username) => API.get(`/user/${username}`);
+export const saveProfileInfo = (username, form) =>
+  API.patch(`user/${username}/settings`, form);
