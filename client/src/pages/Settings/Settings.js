@@ -73,7 +73,16 @@ const Settings = ({ user }) => {
       </section>
       <section className="grid grid-cols-8 grid-rows-6 gap-4">
         <div className="col-span-4 row-span-5">
-          <DefaultImage />
+          {!user?.result?.profilePhoto ? (
+            <DefaultImage />
+          ) : (
+            <img
+              component="img"
+              alt="profileImg"
+              src={user?.result?.profilePhoto}
+              className="w-full max-h-[500px] rounded-xl"
+            />
+          )}
         </div>
         <div className="flex items-end w-full col-span-4 col-start-1 row-start-6">
           <label className="block w-full rounded-md bg-bgColor">

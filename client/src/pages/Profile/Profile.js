@@ -5,20 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { visitProfile } from "../../actions/auth";
 
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
-import {
-  wrapper,
-  topPart,
-  profileImg,
-  infoDivWrapper,
-  name,
-  bio,
-  tableRowWrapper,
-  dialogue,
-  answerDialogue,
-  bottomPart,
-  editBtn,
-} from "./styles";
+import { CircularProgress } from "@mui/material";
 
 import SocialMedia from "./SocialMedia";
 import DefaultImage from "./DefaultImage";
@@ -33,6 +20,11 @@ const Profile = ({ user }) => {
 
   const isOwnerOfProfile = user?.result?.username === username ? true : false;
 
+  const tableRowWrapper =
+    "flex items-center justify-start gap-[15px] mb-[10px]";
+  const dialogue = "w-[100px] text-textColor text-lg font-semibold";
+  const answerDialogue = "text-textYellow text-lg";
+
   useEffect(() => {
     dispatch(visitProfile(username));
   }, [dispatch, username]);
@@ -45,115 +37,80 @@ const Profile = ({ user }) => {
   }
 
   return (
-    <Box sx={wrapper}>
+    <div className="relative flex flex-col items-start justify-start gap-10 p-8 rounded-lg bg-mainColor">
       {isOwnerOfProfile && (
-        <Button sx={editBtn} onClick={() => navigate(`/${username}/settings`)}>
+        <button
+          className="w-[150px] h-[42px] flex items-center justify-center gap-[2px] text-textColor text-xs font-medium bg-bgColor rounded-md absolute top-[10px] right-[10px]"
+          onClick={() => navigate(`/${username}/settings`)}
+        >
           <SettingsIcon />
           settings
-        </Button>
+        </button>
       )}
-      <Box sx={topPart}>
-        {userInfo?.profileImg ? (
-          <Box
+      <div className="grid grid-cols-12 grid-rows-4 gap-8">
+        {userInfo?.profilePhoto ? (
+          <img
             component="img"
             alt="profileImg"
-            src={userInfo?.profileImg}
-            sx={profileImg}
+            src={userInfo?.profilePhoto}
+            className="w-full h-auto col-span-4 row-span-4 rounded-lg"
           />
         ) : (
           <DefaultImage />
         )}
-        <Box component="div" sx={infoDivWrapper}>
-          <Typography sx={name} variant="h1">
+        <div className="flex flex-col items-start justify-center w-full col-span-8 row-span-4 gap-4 col-start-500">
+          <h1 className="text-textColor font-extrabold text-[50px]">
             {userInfo?.name}
-          </Typography>
+          </h1>
           <SocialMedia userInfo={userInfo} />
           {userInfo?.bio && (
-            <Typography variant="body2" sx={bio}>
+            <h5 className="mt-5 text-placeholderColor font-[17px] mb-5">
               {userInfo?.bio}
-            </Typography>
+            </h5>
           )}
           {userInfo?.gender && (
-            <Box sx={tableRowWrapper}>
-              <Box sx={dialogue}>Gender:</Box>
-              <Box sx={answerDialogue}>{userInfo.gender}</Box>
-            </Box>
+            <div className={tableRowWrapper}>
+              <div className={dialogue}>Gender:</div>
+              <div className={answerDialogue}>{userInfo?.gender}</div>
+            </div>
           )}
           {userInfo?.birthday && (
-            <Box sx={tableRowWrapper}>
-              <Box sx={dialogue}>Birthday:</Box>
-              <Box sx={answerDialogue}>
-                {userInfo.birthday.substring(0, 10)}
-              </Box>
-            </Box>
+            <div className={tableRowWrapper}>
+              <div className={dialogue}>Birthday:</div>
+              <div className={answerDialogue}>
+                {userInfo?.birthday.substring(0, 10)}
+              </div>
+            </div>
           )}
           {userInfo?.country && (
-            <Box sx={tableRowWrapper}>
-              <Box sx={dialogue}>Country:</Box>
-              <Box sx={answerDialogue}>{userInfo.country}</Box>
-            </Box>
+            <div className={tableRowWrapper}>
+              <div className={dialogue}>Country:</div>
+              <div className={answerDialogue}>{userInfo.country}</div>
+            </div>
           )}
           {userInfo?.city && (
-            <Box sx={tableRowWrapper}>
-              <Box sx={dialogue}>City:</Box>
-              <Box sx={answerDialogue}>{userInfo.city}</Box>
-            </Box>
+            <div className={tableRowWrapper}>
+              <div className={dialogue}>City:</div>
+              <div className={answerDialogue}>{userInfo?.city}</div>
+            </div>
           )}
-        </Box>
-      </Box>
-      <Box sx={bottomPart}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-          }}
-        >
-          <Typography
-            sx={{ fontSize: "35px", fontWeight: "500", color: "#FFF" }}
-          >
-            15
-          </Typography>
-          <Typography
-            sx={{
-              color: "#323A55",
-              marginTop: "-15px",
-              fontWeight: "700",
-              fontSize: "21px",
-            }}
-          >
+        </div>
+      </div>
+      <div className="flex items-center w-full justify-between gap-[50px]">
+        <div className="flex flex-col items-center justify-center cursor-pointer">
+          <h2 className="text-4xl font-medium text-textColor">15</h2>
+          <h3 className="mt-[-10px] text-xl font-bold text-textGreen tracking-widest">
             Posts
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-          }}
-        >
-          <Typography
-            sx={{ fontSize: "35px", fontWeight: "500", color: "#FFF" }}
-          >
-            5
-          </Typography>
-          <Typography
-            sx={{
-              color: "#323A55",
-              marginTop: "-15px",
-              fontWeight: "700",
-              fontSize: "21px",
-            }}
-          >
-            Liked Posts
-          </Typography>
-        </Box>
-      </Box>
-    </Box>
+          </h3>
+        </div>
+        <div className="flex flex-col items-center justify-center cursor-pointer">
+          <h2 className="text-4xl font-medium text-textColor">3</h2>
+          <h3 className="mt-[-10px] text-xl font-bold text-textGreen tracking-widest">
+            Likes
+          </h3>
+        </div>
+      </div>
+    </div>
   );
 };
 

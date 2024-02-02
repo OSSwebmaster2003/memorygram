@@ -1,31 +1,23 @@
-import { Box, Typography } from "@mui/material";
 import React from "react";
-import { cameraIcon, defaultImageWrapper } from "./styles";
 
 import LinkedCameraIcon from "@mui/icons-material/LinkedCamera";
 
 const DefaultImage = () => {
   return (
-    <Box sx={defaultImageWrapper} elevation={6}>
-      <LinkedCameraIcon sx={cameraIcon} />
-      <Typography
-        sx={{
-          fontSize: "30px",
-          fontWeight: "700",
-          color: "#404961",
-          textAlign: "center",
-        }}
-      >
+    <div className="w-full h-auto min-h-[400px] bg-bgColor rounded-lg flex items-center justify-center flex-col gap-5 relative col-span-4 row-span-4">
+      <LinkedCameraIcon sx={{ fontSize: "80px" }} className=" text-textGrey" />
+      <h2 className="text-3xl font-bold text-center text-textGrey">
         Unfortunately , no real photo
-      </Typography>
-      <Box sx={{ position: "absolute", bottom: "10px" }}>
-        <Typography
+      </h2>
+      <div className="absolute bottom-[10px]">
+        <h3
+          className="text-2xl italic font-bold text-textGrey"
           sx={{ color: "#404961", fontSize: "25px", fontWeight: "700" }}
         >
           Memorygram
-        </Typography>
-      </Box>
-    </Box>
+        </h3>
+      </div>
+    </div>
   );
 };
 

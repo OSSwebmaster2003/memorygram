@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import uploadImage from "../../images/upload.png";
 
 const ImageUploader = () => {
@@ -10,9 +10,9 @@ const ImageUploader = () => {
 
   return (
     <>
-      <div onClick={handleImageClick} style={{ cursor: "pointer" }}>
+      <div onClick={handleImageClick} className="cursor-pointer">
         <img src={uploadImage} alt="upload" />
-        <input type="file" ref={inputRef} style={{ display: "none" }} />
+        <input type="file" ref={inputRef} className="hidden" />
       </div>
     </>
   );
