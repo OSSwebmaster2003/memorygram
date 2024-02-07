@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import FileBase from "react-file-base64";

@@ -5,9 +5,6 @@ import { jwtDecode } from "jwt-decode";
 
 import Toolbar from "./Toolbar/Toolbar";
 
-import { Box } from "@mui/material";
-import { appBar, image, brandContainer } from "./styles";
-
 import memoriesLogo from "../../images/memories-Logo.png";
 import memoriesText from "../../images/memories-Text.png";
 
@@ -40,19 +37,17 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <Box component="nav" sx={appBar} position="static" color="inherit">
-      <Link to="/" sx={brandContainer}>
-        <Box component="img" src={memoriesText} alt="icon" height="45px" />
-        <Box
-          sx={image}
-          component="img"
+    <nav className="static flex items-center justify-between px-10 py-5 mb-16 border-b border-b-placeholderColor">
+      <Link to="/" className="flex items-center justify-start gap-1">
+        <img src={memoriesText} alt="icon" className="h-[45px]" />
+        <img
           src={memoriesLogo}
           alt="logo"
-          height="40px"
+          className="ml-[10px] mt-[5px] h-[40px]"
         />
       </Link>
       <Toolbar user={user} logout={logoutUser} />
-    </Box>
+    </nav>
   );
 };
 
