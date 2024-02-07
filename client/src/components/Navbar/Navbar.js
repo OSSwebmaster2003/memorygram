@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import Toolbar from "./Toolbar/Toolbar";
 
 import memoriesLogo from "../../images/memories-Logo.png";
-import memoriesText from "../../images/memories-Text.png";
+import updatedLogo from "../../images/updatedLogo.png";
 
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -38,12 +38,12 @@ const Navbar = () => {
 
   return (
     <nav className="static flex items-center justify-between px-10 py-5 mb-16 border-b border-b-placeholderColor">
-      <Link to="/" className="flex items-center justify-start gap-1">
-        <img src={memoriesText} alt="icon" className="h-[45px]" />
+      <Link to="/" className="flex items-center justify-start gap-0">
+        <img src={updatedLogo} alt="icon" className="h-[60px]" />
         <img
           src={memoriesLogo}
           alt="logo"
-          className="ml-[10px] mt-[5px] h-[40px]"
+          className="ml-[10px] mt-[5px] h-[30px]"
         />
       </Link>
       <Toolbar user={user} logout={logoutUser} />

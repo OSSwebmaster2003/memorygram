@@ -38,12 +38,25 @@ const Dropdown = ({ user, logout }) => {
   return (
     <div className="relative inline-block text-left" ref={dropdownRef}>
       <div className="p-0 m-0" onClick={toggleDropdown}>
-        <button
-          type="button"
-          className="flex items-center justify-center w-10 h-10 text-xl rounded-full cursor-pointer text-textColor bg-textGreen"
-        >
-          {user?.result?.name.charAt(0)}
-        </button>
+        {!user?.result?.profilePhoto ? (
+          <button
+            type="button"
+            className="flex items-center justify-center w-10 h-10 text-xl rounded-full cursor-pointer text-textColor bg-textGreen"
+          >
+            {user?.result?.name.charAt(0)}
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="flex items-center justify-center w-10 h-10 text-xl rounded-full cursor-pointer"
+          >
+            <img
+              src={user?.result?.profilePhoto}
+              className="object-cover w-full h-full rounded-full"
+              alt=""
+            />
+          </button>
+        )}
       </div>
       {isOpen && (
         <div className="absolute right-0 z-10 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none min-w-[180px]">
@@ -74,29 +87,6 @@ const Dropdown = ({ user, logout }) => {
               Logout
             </div>
           </div>
-          {/* <MenuItem
-            onClick={() => {
-              navigate(`/${username}`);
-            }}
-          >
-            <Avatar /> Profile
-          </MenuItem> */}
-          {/* <MenuItem
-            onClick={() => {
-              navigate("/my-memories");
-            }}
-          >
-            <ListItemIcon>
-              <InsertPhotoIcon size="small" />
-            </ListItemIcon>
-            My memories
-          </MenuItem> */}
-          {/* <MenuItem onClick={logout}>
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
-          </MenuItem> */}
         </div>
       )}
     </div>
