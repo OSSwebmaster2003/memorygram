@@ -30,12 +30,13 @@ export const signup = (formData, router) => async (dispatch) => {
     console.log(error);
   }
 };
+
 export const visitProfile = (username) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.visitProfile(username);
 
-    dispatch({ type: GET_PROFILE, data });
+    await dispatch({ type: GET_PROFILE, data });
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
@@ -49,11 +50,11 @@ export const saveProfileInfo =
 
       const { data } = await api.saveProfileInfo(username, form);
 
-      console.log(data);
-
       dispatch({ type: SAVE_PROFILE_INFO, data });
 
-      navigate(`/${username}`);
+      await dispatch({ type: GET_PROFILE, data });
+
+      await navigate(`/${data?.result?.username}`);
 
       dispatch({ type: END_LOADING });
     } catch (error) {

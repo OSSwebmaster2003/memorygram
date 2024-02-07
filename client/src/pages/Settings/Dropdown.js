@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-const Dropdown = ({ form, setForm, value }) => {
+const Dropdown = ({ selectedOption, setSelectedOption, value }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (e) => {
+    e.stopPropagation();
     setIsOpen((prev) => !prev);
   };
 
-  const handleOptionClick = (option) => {
-    setForm({ ...form, gender: option });
+  const handleOptionClick = (option, e) => {
+    e.stopPropagation();
+    setSelectedOption(option);
     setIsOpen(false);
   };
 
@@ -37,7 +38,7 @@ const Dropdown = ({ form, setForm, value }) => {
               .map((option, index) => (
                 <li
                   key={index}
-                  onClick={() => handleOptionClick(option)}
+                  onClick={(e) => handleOptionClick(option, e)}
                   className={listItemClassName}
                 >
                   {option}

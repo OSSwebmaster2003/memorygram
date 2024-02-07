@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,10 @@ import SocialMedia from "./SocialMedia";
 import DefaultImage from "./DefaultImage";
 import SettingsIcon from "@mui/icons-material/Settings";
 
-const Profile = ({ user }) => {
+const Profile = () => {
   const { authData, isLoading } = useSelector((state) => state.auth);
+  const user = JSON.parse(localStorage.getItem("profile"));
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { username } = useParams();
@@ -27,7 +29,8 @@ const Profile = ({ user }) => {
 
   useEffect(() => {
     dispatch(visitProfile(username));
-  }, [dispatch, username]);
+    navigate(`/${username}`);
+  }, [username, dispatch, navigate]);
 
   if (isLoading) {
     return <CircularProgress />;

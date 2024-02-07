@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import FileBase from "react-file-base64";
@@ -15,13 +15,14 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 
 import DefaultImage from "../Profile/DefaultImage";
 import Input from "./Input";
-import Dropdown from "./Dropdown";
 import Calendar from "./Calendar";
-// import Calendar from "./Calendar";
 
-const Settings = ({ user }) => {
-  const nameArray = user?.result?.name.split(" ");
+const Settings = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  const nameArray = user?.result?.name.split(" ") ?? [];
   const initialState = {
+    username: user?.result?.username,
     firstName: nameArray[0] || "",
     lastName: nameArray[1] || "",
     gender: user?.result?.gender || "",
@@ -118,7 +119,19 @@ const Settings = ({ user }) => {
           />
         </div>
         <div className="col-span-2 col-start-5 row-start-2">
-          <Dropdown form={form} setForm={setForm} value={form.gender} />
+          {/* <Dropdown
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+            value={form.gender}
+          /> */}
+          <Input
+            handleChange={handleChange}
+            type="text"
+            name="username"
+            label="Username"
+            placeholder="Username"
+            value={form.username}
+          />
         </div>
         <div className="col-span-2 col-start-7 row-start-2">
           <Calendar form={form} setForm={setForm} value={form.birthday} />

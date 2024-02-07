@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -13,6 +13,7 @@ import Settings from "./pages/Settings/Settings";
 const App = () => {
   const [currentId, setCurrentId] = useState(null);
   const user = JSON.parse(localStorage.getItem("profile"));
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -26,11 +27,8 @@ const App = () => {
             path="/auth"
             element={user ? <Navigate to="/posts" /> : <Auth />}
           />
-          <Route path="/:username" element={<Profile user={user} />} />
-          <Route
-            path="/:username/settings"
-            element={<Settings user={user} />}
-          />
+          <Route path="/:username" element={<Profile />} />
+          <Route path="/:username/settings" element={<Settings />} />
           <Route
             path="/posts/create"
             element={
