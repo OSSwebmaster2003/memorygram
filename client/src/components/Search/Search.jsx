@@ -41,36 +41,32 @@ const Search = () => {
 
   return (
     <Grid item xs={12}>
-      <AppBar sx={searchWrapper} position="static" color="inherit">
-        <TextField
-          sx={searchInput}
-          color="secondary"
+      <div className="static flex items-center justify-between w-full gap-6 px-4 py-2 border-2 rounded-md bg-inherit border-textColor">
+        <input
+          className="py-2 pl-3 border-none shadow-none outline-none bg-mainColor text-textColor"
+          style={{ width: "calc((100% - 184px)/2)" }}
           name="search"
-          variant="outlined"
+          placeholder="Search by words"
           label="Search Memories"
           onKeyUp={handleKeyPress}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <MuiChipsInput
-          color="secondary"
-          sx={searchInput}
+          style={{ width: "calc((100% - 184px)/2)" }}
           hideClearAll
           value={tags}
           onAddChip={(chip) => handleAddChip(chip)}
           onDeleteChip={(chip) => handleDeleteChip(chip)}
           label="Search Tags"
-          variant="outlined"
         />
-        <Button
-          sx={searchButton}
+        <button
+          className="flex items-center justify-center w-40 h-16 px-10 py-3 text-lg font-semibold border-none rounded-md outline-none cursor-pointer bg-buttonColor text-textColor"
           onClick={searchPost}
-          color="primary"
-          variant="contained"
         >
           Search
-        </Button>
-      </AppBar>
+        </button>
+      </div>
     </Grid>
   );
 };

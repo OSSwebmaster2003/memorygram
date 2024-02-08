@@ -6,22 +6,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getPost, getPostsBySearch } from "../../actions/posts";
 import CommentSection from "./CommentSection";
 
-import {
-  Paper,
-  Typography,
-  CircularProgress,
-  Box,
-  Divider,
-} from "@mui/material";
-import {
-  wrapper,
-  card,
-  imageSection,
-  loadingPaper,
-  media,
-  section,
-  recommendedPosts,
-} from "./styles";
+import { Paper, CircularProgress, Divider } from "@mui/material";
+import { loadingPaper } from "./styles";
 
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
@@ -63,81 +49,102 @@ const PostDetails = () => {
     );
   }
   return (
-    <Paper sx={wrapper} elevation={6}>
-      <Box component="div" sx={card}>
-        <Box component="div" sx={section}>
-          <Typography variant="h3" component="h2">
+    <div className="w-full p-4 mt-10 mb-10 border-none rounded-lg bg-mainColor">
+      <div className="flex w-full gap-5">
+        <div className="flex-1 rounded-lg">
+          <h2 className="mb-4 text-4xl font-bold text-textColor">
             {post.title}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="h6"
-            color="textSecondary"
-            component="h2"
-          >
+          </h2>
+          <h6 className="w-full mb-3 text-sm font-semibold text-textGreen">
             {post.tags.map((tag) => `#${tag} `)}
-          </Typography>
-          <Typography gutterBottom variant="body1" component="p">
+          </h6>
+          <p className="w-full mb-3 text-base italic text-placeholderColor">
             {post.message}
-          </Typography>
-          <Typography variant="h6">Created by: {post.name}</Typography>
-          <Typography variant="body1">
+          </p>
+          <h6 className="text-2xl font-medium text-textColor">
+            Created by:{" "}
+            <span className="mb-3 font-bold text-buttonColor">{post.name}</span>
+          </h6>
+          <h6 className="text-xs text-textYellow">
             {moment(post.createdAt).fromNow()}
-          </Typography>
-          <Divider style={{ margin: "20px 0" }} />
-          <Typography variant="body1">
+          </h6>
+          <Divider
+            style={{
+              margin: "20px 0",
+              color: "white",
+              border: "1px solid white",
+            }}
+          />
+          <h1 className="text-textColor">
             <strong>Realtime Chat - coming soon!</strong>
-          </Typography>
-          <Divider style={{ margin: "20px 0" }} />
-        </Box>
-        <Box component="div" sx={imageSection}>
-          <Box
-            component="img"
-            sx={media}
+          </h1>
+          <Divider
+            style={{
+              margin: "20px 0",
+              color: "white",
+              border: "1px solid white",
+            }}
+          />
+        </div>
+        <div>
+          <img
+            className="rounded-lg object-cover w-[500px] h-[300px]"
             src={
               post.selectedFile ||
               "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
             }
             alt={post.title}
           />
-        </Box>
-      </Box>
+        </div>
+      </div>
       <CommentSection post={post} />
 
       {recommendedposts.length && (
-        <Box sx={section}>
-          <Typography gutterBottom variant="h5">
+        <div className="flex-1 rounded-lg">
+          <h5 className="text-2xl font-semibold text-textYellow">
             You might also like:
-          </Typography>
-          <Divider />
-          <Box sx={recommendedPosts}>
+          </h5>
+          <div className="flex items-start justify-start gap-3">
             {recommendedposts.map(
               ({ title, message, name, likes, selectedFile, _id }) => (
-                <Box
+                <div
                   key={_id}
-                  sx={{ margin: "20px", cursor: "pointer" }}
+                  className="mt-5 cursor-pointer max-w-[400px] rounded-md p-5 bg-bgColor"
                   onClick={() => openPost(_id)}
                 >
-                  <Typography gutterBottom variant="h6">
+                  <h2 className="mb-1 text-2xl font-bold text-textColor">
                     {title}
-                  </Typography>
-                  <Typography gutterBottom variant="subtitle2">
+                  </h2>
+                  <h5 className="mb-2 text-sm italic font-semibold text-buttonColor">
                     {name}
-                  </Typography>
-                  <Typography gutterBottom variant="subtitle2">
+                  </h5>
+                  <h3
+                    className="mb-3 text-sm text-placeholderColor"
+                    style={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      display: "-webkit-box",
+                      WebkitLineClamp: "4",
+                      WebkitBoxOrient: "vertical",
+                    }}
+                  >
                     {message}
-                  </Typography>
-                  <Typography gutterBottom variant="subtitle1">
+                  </h3>
+                  <h3 className="mb-2 text-textYellow">
                     Likes: {likes.length}
-                  </Typography>
-                  <Box component="img" src={selectedFile} width="200px" />
-                </Box>
+                  </h3>
+                  <img
+                    src={selectedFile}
+                    alt=""
+                    className="w-full rounded-md aspect-video"
+                  />
+                </div>
               )
             )}
-          </Box>
-        </Box>
+          </div>
+        </div>
       )}
-    </Paper>
+    </div>
   );
 };
 

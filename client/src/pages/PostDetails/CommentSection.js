@@ -28,51 +28,47 @@ const CommentSection = ({ post }) => {
     commentsRef.current.scrollIntoView({ behavior: "smooth" });
   };
   return (
-    <Box>
-      <Box component="div" sx={commentsOuterContainer}>
-        <Box component="div" sx={commentsInnerContainer}>
-          <Typography gutterBottom variant="h6">
-            Comments
-          </Typography>
+    <div>
+      <div className="flex justify-between mt-3 mb-3">
+        <div className="h-[200px] overflow-y-auto mr-7 w-[calc(100% - 440px)]">
+          <h3 className="mb-3 text-2xl text-textColor">Comments</h3>
           {comments.length ? (
             comments?.map((c, i) => (
-              <Typography key={i} gutterBottom variant="subtitle1">
-                <strong>{c.split(": ")[0]}</strong>
+              <h4 key={i} className="ml-2 text-sm text-placeholderColor">
+                <strong className="text-buttonColor">{c.split(": ")[0]}</strong>
                 {c.split(":")[1]}
-              </Typography>
+              </h4>
             ))
           ) : (
-            <Typography variant="subtitle1">No comments yet</Typography>
+            <h6 className="ml-2 text-sm text-placeholderColor">
+              No comments yet
+            </h6>
           )}
           <div ref={commentsRef} />
-        </Box>
+        </div>
         {user?.result?.name && (
-          <Box sx={{ width: "400px" }}>
-            <Typography gutterBottom variant="h6">
-              Leave a comment
-            </Typography>
-            <TextField
-              fullWidth
-              rows={4}
+          <div className="w-[400px]">
+            <h5 className="mb-2 text-textColor">Leave a comment</h5>
+            <textarea
+              className="w-full p-2 border rounded-md bg-inherit border-placeholderColor text-textColor"
+              rows={5}
               variant="outlined"
               label="Comment"
-              multiline
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            <Button
-              sx={commentButton}
-              fullWidth
+            <button
+              className="flex items-center justify-center w-full py-2 mt-2 rounded-md cursor-pointer bg-buttonColor text-textColor disabled:bg-blue-300 disabled:cursor-not-allowed"
               disabled={!comment}
               variant="contained"
               onClick={handleSubmit}
             >
               Comment
-            </Button>
-          </Box>
+            </button>
+          </div>
         )}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

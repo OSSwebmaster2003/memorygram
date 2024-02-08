@@ -19,6 +19,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const { username } = useParams();
   const userInfo = authData && authData[0];
+  console.log(user);
+  console.log(userInfo);
 
   const isOwnerOfProfile = user?.result?.username === username ? true : false;
 
@@ -63,7 +65,7 @@ const Profile = () => {
         )}
         <div className="flex flex-col items-start justify-center w-full col-span-8 row-span-4 gap-4 col-start-500">
           <h1 className="text-textColor font-extrabold text-[50px]">
-            {userInfo?.name}
+            {`${userInfo?.firstName} ${userInfo?.lastName}`}
           </h1>
           <SocialMedia userInfo={userInfo} />
           {userInfo?.bio && (
@@ -71,10 +73,10 @@ const Profile = () => {
               {userInfo?.bio}
             </h5>
           )}
-          {userInfo?.gender && (
+          {userInfo?.username && (
             <div className={tableRowWrapper}>
-              <div className={dialogue}>Gender:</div>
-              <div className={answerDialogue}>{userInfo?.gender}</div>
+              <div className={dialogue}>Username:</div>
+              <div className={answerDialogue}>{userInfo?.username}</div>
             </div>
           )}
           {userInfo?.birthday && (

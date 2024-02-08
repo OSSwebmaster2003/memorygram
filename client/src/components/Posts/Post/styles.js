@@ -21,12 +21,6 @@ const card = {
   background: "transparent",
   backdropFilter: "blur(5px)",
 };
-const overlay = {
-  position: "absolute",
-  top: "20px",
-  left: "20px",
-  color: "white",
-};
 const overlay2 = {
   position: "absolute",
   top: "5px",
@@ -36,12 +30,6 @@ const overlay2 = {
 };
 const grid = {
   display: "flex",
-};
-const details = {
-  display: "flex",
-  justifyContent: "space-between",
-  margin: "20px",
-  color: "white",
 };
 const title = {
   padding: "0 16px",
@@ -63,8 +51,9 @@ const truncatedString = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   display: "-webkit-box",
-  WebkitLineClamp: "5",
+  WebkitLineClamp: "4",
   WebkitBoxOrient: "vertical",
+  color: "rgba(255, 255, 255, 0.60)",
 };
 
 export {
@@ -72,10 +61,8 @@ export {
   border,
   fullHeightCard,
   card,
-  overlay,
   overlay2,
   grid,
-  details,
   title,
   cardActions,
   cardAction,

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import Posts from "../../components/Posts/Posts";
 
-import { Grow, Grid, Paper, Box } from "@mui/material";
+import { Grow, Grid, Box } from "@mui/material";
 
 import Paginate from "../../components/Pagination/Pagination";
 import Search from "../../components/Search/Search.jsx";

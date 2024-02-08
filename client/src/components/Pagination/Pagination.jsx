@@ -20,16 +20,17 @@ const Paginate = ({ page }) => {
   return (
     <Pagination
       sx={paginationWrapper}
+      style={{ color: "white" }}
       count={numberOfPages}
       page={Number(page) || 1}
       variant="standard"
-      color="secondary"
       shape="rounded"
       renderItem={(item) => (
         <PaginationItem
           {...item}
           component={Link}
           to={`/posts?page=${item.page}`}
+          style={{ color: "white" }}
         />
       )}
     />

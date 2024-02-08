@@ -23,9 +23,7 @@ import {
 import {
   media,
   card,
-  overlay,
   overlay2,
-  details,
   title,
   cardActions,
   cardAction,
@@ -46,31 +44,38 @@ const Post = ({ post, setCurrentId }) => {
     if (post?.likes?.length > 0) {
       return post.likes.find((like) => like === userId) ? (
         <>
-          <ThumbUpAltIcon fontSize="small" sx={{ color: "#2E364B" }} />
-          <Box component="div" sx={{ color: "#2E364B" }}>
+          <ThumbUpAltIcon
+            fontSize="small"
+            className="font-bold text-buttonColor"
+          />
+          <div className="font-bold text-buttonColor">
             &nbsp;
             {post.likes.length > 2
               ? `You and ${post.likes.length - 1} others`
               : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
-          </Box>
+          </div>
         </>
       ) : (
         <>
-          <ThumbUpOffAltIcon fontSize="small" sx={{ color: "#2E364B" }} />
-          <Box component="div" sx={{ color: "#2E364B" }}>
+          <ThumbUpOffAltIcon
+            fontSize="small"
+            className="font-bold text-buttonColor"
+          />
+          <div className="font-bold text-buttonColor">
             &nbsp;{post.likes.length}{" "}
             {post.likes.length === 1 ? "Like" : "Likes"}
-          </Box>
+          </div>
         </>
       );
     }
 
     return (
       <>
-        <ThumbUpOffAltIcon fontSize="small" sx={{ color: "#2E364B" }} />
-        <Box component="div" sx={{ color: "#2E364B" }}>
-          &nbsp;Like
-        </Box>
+        <ThumbUpOffAltIcon
+          fontSize="small"
+          className="text-bold text-buttonColor"
+        />
+        <div className="font-bold text-buttonColor">&nbsp;Like</div>
       </>
     );
   };
@@ -78,12 +83,12 @@ const Post = ({ post, setCurrentId }) => {
   return (
     <Card component="div" sx={card} raised elevation={6}>
       <CardMedia sx={media} image={post.selectedFile} title={post.title} />
-      <Box component="div" sx={overlay}>
-        <Typography variant="h6">{post.name}</Typography>
+      <div className="absolute top-5 left-5 text-textColor">
+        <h6>{post.name}</h6>
         <Typography variant="body2">
           {moment(post.createdAt).fromNow()}
         </Typography>
-      </Box>
+      </div>
       {(user?.result?.sub === post?.creator ||
         user?.result?._id === post?.creator) && (
         <Box component="div" sx={overlay2}>
@@ -98,16 +103,11 @@ const Post = ({ post, setCurrentId }) => {
           </Button>
         </Box>
       )}
-      <Box component="div" sx={details}>
-        <Typography
-          variant="body2"
-          color="black"
-          fontWeight={600}
-          component="h2"
-        >
+      <div className="flex justify-between m-5 text-textColor">
+        <h2 className="text-sm text-textGreen">
           {post.tags.map((tag) => `#${tag} `)}
-        </Typography>
-      </Box>
+        </h2>
+      </div>
       <ButtonBase sx={cardAction} component="span" onClick={openPost}>
         <Typography
           sx={title}
@@ -121,12 +121,7 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </ButtonBase>
       <CardContent>
-        <Typography
-          variant="subtitle1"
-          color="black"
-          component="p"
-          sx={truncatedString}
-        >
+        <Typography variant="subtitle1" component="p" sx={truncatedString}>
           {post.message}
         </Typography>
       </CardContent>

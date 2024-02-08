@@ -20,11 +20,10 @@ import Calendar from "./Calendar";
 const Settings = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
 
-  const nameArray = user?.result?.name.split(" ") ?? [];
   const initialState = {
     username: user?.result?.username,
-    firstName: nameArray[0] || "",
-    lastName: nameArray[1] || "",
+    firstName: user?.result?.firstName || "",
+    lastName: user?.result?.lastName || "",
     gender: user?.result?.gender || "",
     birthday: user?.result?.birthday || "",
     country: user?.result?.country || "",
@@ -119,11 +118,6 @@ const Settings = () => {
           />
         </div>
         <div className="col-span-2 col-start-5 row-start-2">
-          {/* <Dropdown
-            selectedOption={selectedOption}
-            setSelectedOption={setSelectedOption}
-            value={form.gender}
-          /> */}
           <Input
             handleChange={handleChange}
             type="text"

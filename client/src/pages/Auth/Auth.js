@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
-import {
-  Avatar,
-  Button,
-  Paper,
-  Grid,
-  Typography,
-  Container,
-  Box,
-} from "@mui/material";
+import { Grid } from "@mui/material";
 import LockClockOutlinedIcon from "@mui/icons-material/LockClockOutlined";
 
 import Input from "./Input";
 import { signup, signin } from "../../actions/auth";
 
-import { avatar, paper, submit, heading } from "./styles";
+import { avatar, heading } from "./styles";
 
 const initialState = {
   firstName: "",
@@ -56,30 +46,20 @@ const Auth = () => {
     setShowPassword(false);
   };
 
-  const googleSuccess = async (res) => {
-    const token = res?.credential;
-    const decoded = jwtDecode(token);
-    const result = decoded;
-
-    try {
-      dispatch({ type: "AUTH", data: { result, token } });
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <Container component="main" maxWidth="xs">
-      <Paper sx={paper} elevation={3}>
-        <Avatar sx={avatar}>
+    <main className="flex items-center justify-center w-full">
+      <div className="flex flex-col items-center p-5 mt-8 rounded-md w-[500px] bg-mainColor justify-center">
+        <div
+          className="flex items-center justify-center w-12 h-12 m-1 text-lg font-bold rounded-full bg-textGreen text-textColor"
+          sx={avatar}
+        >
           <LockClockOutlinedIcon />
-        </Avatar>
-        <Typography variant="h5" sx={heading}>
+        </div>
+        <h5 className="mt-1 mb-4 text-2xl text-textColor" sx={heading}>
           {isSignUp ? "Sign Up" : "Sign In"}
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} autoComplete="off">
-          <Grid container spacing={2}>
+        </h5>
+        <form onSubmit={handleSubmit} autoComplete="off" className="w-full">
+          <Grid spacing={2}>
             {isSignUp && (
               <>
                 <Input
@@ -125,48 +105,27 @@ const Auth = () => {
               />
             )}
           </Grid>
-          <Button type="submit" fullWidth variant="contained" sx={submit}>
-            {isSignUp ? "Sign Up" : "Sign In"}
-          </Button>
-          <Box
-            sx={{
-              marginBottom: "10px",
-              width: "376px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0",
-              margin: "0",
-            }}
+          <button
+            type="submit"
+            className="w-full py-3 mt-3 mb-5 text-base font-semibold rounded-md bg-buttonColor text-textColor"
           >
-            <GoogleLogin
-              size="large"
-              theme="outline"
-              onSuccess={googleSuccess}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-            />
-          </Box>
+            {isSignUp ? "Sign Up" : "Sign In"}
+          </button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Button
-                sx={{
-                  color: "black",
-                  letterSpacing: "1.2",
-                  fontSize: "12px",
-                }}
+              <button
+                className="text-sm text-placeholderColor"
                 onClick={switchMode}
               >
                 {isSignUp
                   ? "Already have an account? Sign In"
                   : "Don't have an account? Sign Up"}
-              </Button>
+              </button>
             </Grid>
           </Grid>
-        </Box>
-      </Paper>
-    </Container>
+        </form>
+      </div>
+    </main>
   );
 };
 

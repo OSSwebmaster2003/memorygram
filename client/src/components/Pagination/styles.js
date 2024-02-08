@@ -5,6 +5,7 @@ const paginationWrapper = {
   gap: "100px",
   justifyContent: "flex-end",
   marginBottom: "30px",
+  color: "white",
 };
 
 export { paginationWrapper };

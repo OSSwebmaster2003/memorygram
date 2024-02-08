@@ -5,16 +5,6 @@ import FileBase from "react-file-base64";
 
 import { createPost, updatePost } from "../../actions/posts";
 
-import { TextField, Button, Paper, Typography, Box } from "@mui/material";
-import {
-  wrapper,
-  form,
-  heading,
-  choosePicture,
-  submitBtn,
-  clearBtn,
-} from "./styles";
-
 const CreateMemory = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     title: "",
@@ -64,51 +54,55 @@ const CreateMemory = ({ currentId, setCurrentId }) => {
     }
   };
 
+  const inputStyle =
+    "w-full px-4 py-3 border-none rounded-md outline-none bg-bgColor text-textColor placeholder:text-placeholderColor placeholder:font-bold";
+
   return (
-    <Paper sx={wrapper}>
-      <Box
-        sx={form}
-        component="form"
+    <div className="flex items-center justify-center">
+      <form
+        style={{ width: "500px", padding: "20px" }}
+        className="flex flex-col items-center justify-center gap-4 rounded-lg bg-mainColor"
         autoComplete="off"
         noValidate
         action=""
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6" sx={heading}>
+        <h6 className="w-full text-lg text-center text-textColor">
           {currentId ? `Editing` : `Creating`} a Memory
-        </Typography>
-        <TextField
+        </h6>
+        <input
           name="title"
-          variant="outlined"
+          placeholder="Title"
+          className={inputStyle}
           label="Title"
-          fullWidth
           value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+          required
         />
-        <TextField
+        <textarea
+          className={inputStyle}
+          placeholder="Message"
           name="message"
-          variant="outlined"
           label="Message"
           rows="7"
-          multiline
-          fullWidth
           value={postData.message}
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
           }
+          required
         />
-        <TextField
+        <input
           name="tags"
+          className={inputStyle}
           placeholder="asia,china,fun"
-          variant="outlined"
           label="Tags"
-          fullWidth
           value={postData.tags}
           onChange={(e) =>
             setPostData({ ...postData, tags: e.target.value.split(",") })
           }
+          required
         />
-        <Box sx={choosePicture}>
+        <div className="flex items-center justify-start w-full gap-2 cursor-pointer">
           <FileBase
             type="file"
             multiple={false}
@@ -116,10 +110,9 @@ const CreateMemory = ({ currentId, setCurrentId }) => {
               setPostData({ ...postData, selectedFile: base64 })
             }
           />
-        </Box>
-        <Button
-          sx={submitBtn}
-          variant="contained"
+        </div>
+        <button
+          className="w-full py-2 text-base font-medium border-2 rounded-md cursor-pointer text-textColor bg-inherit"
           type="submit"
           disabled={
             !postData.title ||
@@ -129,12 +122,16 @@ const CreateMemory = ({ currentId, setCurrentId }) => {
           }
         >
           Submit
-        </Button>
-        <Button sx={clearBtn} variant="contained" onClick={clear}>
+        </button>
+        <button
+          className="w-full py-2 text-base font-medium bg-red-600 rounded-md cursor-pointer text-textColor"
+          onClick={clear}
+          type="button"
+        >
           Clear
-        </Button>
-      </Box>
-    </Paper>
+        </button>
+      </form>
+    </div>
   );
 };
 
