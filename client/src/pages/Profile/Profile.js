@@ -19,8 +19,6 @@ const Profile = () => {
   const navigate = useNavigate();
   const { username } = useParams();
   const userInfo = authData && authData[0];
-  console.log(user);
-  console.log(userInfo);
 
   const isOwnerOfProfile = user?.result?.username === username ? true : false;
 

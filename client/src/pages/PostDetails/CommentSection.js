@@ -3,14 +3,6 @@ import { useDispatch } from "react-redux";
 
 import { commentPost } from "../../actions/posts";
 
-import { Typography, TextField, Button, Box } from "@mui/material";
-
-import {
-  commentButton,
-  commentsInnerContainer,
-  commentsOuterContainer,
-} from "./styles";
-
 const CommentSection = ({ post }) => {
   const [comments, setComments] = useState(post?.comments);
   const [comment, setComment] = useState("");

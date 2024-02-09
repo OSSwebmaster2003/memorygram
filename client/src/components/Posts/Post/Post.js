@@ -9,26 +9,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
-import {
-  Card,
-  CardActions,
-  CardMedia,
-  CardContent,
-  Button,
-  Typography,
-  Box,
-  ButtonBase,
-} from "@mui/material";
+import { CardContent, Button, Typography } from "@mui/material";
 
-import {
-  media,
-  card,
-  overlay2,
-  title,
-  cardActions,
-  cardAction,
-  truncatedString,
-} from "./styles";
+import { truncatedString } from "./styles";
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
@@ -81,8 +64,13 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   return (
-    <Card component="div" sx={card} raised elevation={6}>
-      <CardMedia sx={media} image={post.selectedFile} title={post.title} />
+    <div className="relative flex flex-col justify-between h-full rounded-md bg-bgColor">
+      <img
+        className="w-full aspect-video rounded-t-md"
+        src={post.selectedFile}
+        title={post.title}
+        alt={post.title}
+      />
       <div className="absolute top-5 left-5 text-textColor">
         <h6>{post.name}</h6>
         <Typography variant="body2">
@@ -91,7 +79,7 @@ const Post = ({ post, setCurrentId }) => {
       </div>
       {(user?.result?.sub === post?.creator ||
         user?.result?._id === post?.creator) && (
-        <Box component="div" sx={overlay2}>
+        <div className="absolute top-[5px] right-[-15px] text-textColor z-50">
           <Button
             style={{ color: "white" }}
             onClick={() => {
@@ -101,54 +89,43 @@ const Post = ({ post, setCurrentId }) => {
           >
             <EditIcon fontSize="default" />
           </Button>
-        </Box>
+        </div>
       )}
       <div className="flex justify-between m-5 text-textColor">
         <h2 className="text-sm text-textGreen">
           {post.tags.map((tag) => `#${tag} `)}
         </h2>
       </div>
-      <ButtonBase sx={cardAction} component="span" onClick={openPost}>
-        <Typography
-          sx={title}
-          gutterBottom
-          variant="h5"
-          component="h2"
-          color="white"
-          fontWeight={700}
-        >
-          {post.title}
-        </Typography>
-      </ButtonBase>
+      <button className="block text-start" onClick={openPost}>
+        <h1 className="px-4 text-2xl font-bold text-textColor">{post.title}</h1>
+      </button>
       <CardContent>
         <Typography variant="subtitle1" component="p" sx={truncatedString}>
           {post.message}
         </Typography>
       </CardContent>
-      <CardActions sx={cardActions}>
-        <Button
-          size="small"
-          color="primary"
+      <div className="flex items-center justify-between pt-1 pb-3">
+        <button
+          className="flex items-center justify-center px-4 py-2 text-buttonColor"
           disabled={!user?.result}
           onClick={() => dispatch(likePost(post._id))}
         >
           <Likes />
-        </Button>
+        </button>
         {(user?.result?.sub === post?.creator ||
           user?.result?._id === post?.creator) && (
-          <Button
-            size="small"
-            sx={{ color: "red" }}
+          <button
+            className="flex items-center justify-center px-4 py-2 font-semibold text-red-600"
             onClick={() => {
               dispatch(deletePost(post._id));
               navigate("/");
             }}
           >
             <DeleteIcon fontSize="small" /> Delete
-          </Button>
+          </button>
         )}
-      </CardActions>
-    </Card>
+      </div>
+    </div>
   );
 };
 

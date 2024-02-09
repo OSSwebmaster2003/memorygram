@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import Posts from "../../components/Posts/Posts";
 
-import { Grow, Grid, Box } from "@mui/material";
+import { Grow } from "@mui/material";
 
 import Paginate from "../../components/Pagination/Pagination";
 import Search from "../../components/Search/Search.jsx";
@@ -21,22 +21,19 @@ const Home = ({ setCurrentId }) => {
 
   return (
     <Grow in>
-      <Box>
-        <Grid
-          container
-          justifyContent="space-between"
-          alignItems="stretch"
-          spacing={3}
-        >
-          <Search />
-          <Grid item xs={12}>
-            <Posts setCurrentId={setCurrentId} />
-          </Grid>
-          <Grid item xs={12}>
-            {!searchQuery && !tags.length && <Paginate page={page} />}
-          </Grid>
-        </Grid>
-      </Box>
+      <div>
+        <div className="grid grid-cols-1 gap-4">
+          <div>
+            <Search />
+          </div>
+          <div>
+            <div className="grid">
+              <Posts setCurrentId={setCurrentId} />
+            </div>
+          </div>
+          <div>{!searchQuery && !tags.length && <Paginate page={page} />}</div>
+        </div>
+      </div>
     </Grow>
   );
 };

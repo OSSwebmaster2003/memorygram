@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Grid, CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 
 import Post from "./Post/Post";
 
@@ -13,13 +13,13 @@ const Posts = ({ setCurrentId }) => {
   return isLoading ? (
     <CircularProgress />
   ) : (
-    <Grid display="flex" container alignItems="stretch" spacing={3}>
+    <div className="grid items-stretch gap-4 p-6 rounded-md bg-mainColor sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {posts?.map((post) => (
-        <Grid key={post._id} item xs={12} sm={12} md={6} lg={3}>
+        <div key={post._id}>
           <Post post={post} setCurrentId={setCurrentId} />
-        </Grid>
+        </div>
       ))}
-    </Grid>
+    </div>
   );
 };
 
