@@ -14,3 +14,13 @@ body {
 input[type="file"] {
   color: white;
 }
+.chip-input {
+  background-color: #3657cb !important;
+  padding: 2px 3px !important;
+  color: #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}

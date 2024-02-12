@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-import { MuiChipsInput } from "mui-chips-input";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { getPostsBySearch } from "../../actions/posts";
-
-import { AppBar, Button, Grid, TextField } from "@mui/material";
-
-import { searchWrapper, searchButton, searchInput } from "./styles";
+import TagsInput from "./TagsInput";
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -34,17 +30,11 @@ const Search = () => {
     }
   };
 
-  const handleAddChip = (tag) => setTags([...tags, tag]);
-
-  const handleDeleteChip = (chipToDelete) =>
-    setTags(tags.filter((tag) => tag !== chipToDelete));
-
   return (
-    <Grid item xs={12}>
-      <div className="static flex items-center justify-between w-full gap-6 px-4 py-2 border-2 rounded-md bg-inherit border-textColor">
+    <div className="grid items-center w-full grid-cols-5 grid-rows-1 gap-4 px-4 py-2 rounded-md bg-mainColor">
+      <div className="col-span-2 px-4 rounded-md bg-bgColor">
         <input
-          className="py-2 pl-3 border-none shadow-none outline-none bg-mainColor text-textColor"
-          style={{ width: "calc((100% - 184px)/2)" }}
+          className="w-full h-full py-2 border-none rounded-md shadow-none outline-none bg-inherit text-textColor"
           name="search"
           placeholder="Search by words"
           label="Search Memories"
@@ -52,22 +42,20 @@ const Search = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <MuiChipsInput
-          style={{ width: "calc((100% - 184px)/2)" }}
-          hideClearAll
-          value={tags}
-          onAddChip={(chip) => handleAddChip(chip)}
-          onDeleteChip={(chip) => handleDeleteChip(chip)}
-          label="Search Tags"
-        />
+        <input type="text" className="hidden" />
+      </div>
+      <div className="col-span-2 col-start-3">
+        <TagsInput tags={tags} setTags={setTags} />
+      </div>
+      <div className="col-start-5">
         <button
-          className="flex items-center justify-center w-40 h-16 px-10 py-3 text-lg font-semibold border-none rounded-md outline-none cursor-pointer bg-buttonColor text-textColor"
+          className="flex items-center justify-center w-full h-16 px-10 py-3 text-lg font-semibold border-none rounded-md outline-none cursor-pointer bg-buttonColor text-textColor"
           onClick={searchPost}
         >
           Search
         </button>
       </div>
-    </Grid>
+    </div>
   );
 };
 
