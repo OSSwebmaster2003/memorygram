@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { deletePost, likePost } from "../../../actions/posts";
@@ -18,6 +18,9 @@ const Post = ({ post, setCurrentId }) => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile"));
   const userId = user?.result?.sub || user?.result?._id;
+  const { isLoading } = useSelector((state) => state.posts);
+
+  console.log(isLoading);
 
   const openPost = () => {
     navigate(`/posts/${post._id}`);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import LockClockOutlinedIcon from "@mui/icons-material/LockClockOutlined";
 
@@ -21,8 +21,13 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [form, setForm] = useState(initialState);
+  const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { isLoading } = useSelector((state) => state.auth);
+
+  console.log(isLoading);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +50,10 @@ const Auth = () => {
     setIsSignUp((prev) => !prev);
     setShowPassword(false);
   };
+
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <main className="flex items-center justify-center w-full">
@@ -109,7 +118,7 @@ const Auth = () => {
             type="submit"
             className="w-full py-3 mt-3 mb-5 text-base font-semibold rounded-md bg-buttonColor text-textColor"
           >
-            {isSignUp ? "Sign Up" : "Sign In"}
+            {isLoading ? "Loading..." : isSignUp ? "Sign Up" : "Sign In"}
           </button>
           <Grid container justifyContent="flex-end">
             <Grid item>

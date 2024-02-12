@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { saveProfileInfo } from "../../actions/auth";
@@ -19,6 +19,9 @@ import Calendar from "./Calendar";
 
 const Settings = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
+  const { isLoading } = useSelector((state) => state.auth);
+
+  console.log(isLoading);
 
   const initialState = {
     username: user?.result?.username,
@@ -64,11 +67,17 @@ const Settings = () => {
       <section className="flex items-center justify-between gap-10 mb-8">
         <h1 className="text-3xl font-bold text-white">Profile Settings</h1>
         <button
-          className="flex items-center justify-center gap-2 px-10 py-3 font-bold text-white rounded-md bg-bgColor"
+          className="flex items-center justify-center gap-2 px-10 py-3 font-bold text-white rounded-md bg-bgColor disabled:cursor-not-allowed"
           type="submit"
+          disabled={isLoading}
         >
-          <CheckIcon />
-          Save
+          {isLoading ? (
+            "Saving..."
+          ) : (
+            <div className="flex items-center justify-center gap-1">
+              <CheckIcon /> Save
+            </div>
+          )}
         </button>
       </section>
       <section className="grid grid-cols-8 grid-rows-6 gap-4">

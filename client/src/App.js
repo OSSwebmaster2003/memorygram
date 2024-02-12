@@ -12,7 +12,6 @@ import Settings from "./pages/Settings/Settings";
 
 const App = () => {
   const [currentId, setCurrentId] = useState(null);
-  const user = JSON.parse(localStorage.getItem("profile"));
 
   return (
     <BrowserRouter>
@@ -23,23 +22,13 @@ const App = () => {
           <Route path="/posts" element={<Home setCurrentId={setCurrentId} />} />
           <Route path="/posts/search" element={<Home />} />
           <Route path="/posts/:id" element={<PostDetails />} />
-          <Route
-            path="/auth"
-            element={user ? <Navigate to="/posts" /> : <Auth />}
-          />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/:username" element={<Profile />} />
           <Route path="/:username/settings" element={<Settings />} />
           <Route
             path="/posts/create"
             element={
-              !user ? (
-                <Navigate to="/posts" />
-              ) : (
-                <CreateMemory
-                  currentId={currentId}
-                  setCurrentId={setCurrentId}
-                />
-              )
+              <CreateMemory currentId={currentId} setCurrentId={setCurrentId} />
             }
           />
         </Routes>

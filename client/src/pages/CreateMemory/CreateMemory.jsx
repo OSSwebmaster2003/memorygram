@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import FileBase from "react-file-base64";
 
 import { createPost, updatePost } from "../../actions/posts";
@@ -15,6 +15,7 @@ const CreateMemory = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile"));
+  const { isLoading } = useSelector((state) => state.posts);
 
   const post = useSelector((state) =>
     currentId
@@ -57,6 +58,9 @@ const CreateMemory = ({ currentId, setCurrentId }) => {
   const inputStyle =
     "w-full px-4 py-3 border-none rounded-md outline-none bg-bgColor text-textColor placeholder:text-placeholderColor placeholder:font-bold";
 
+  if (!user) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="flex items-center justify-center">
       <form
@@ -112,7 +116,7 @@ const CreateMemory = ({ currentId, setCurrentId }) => {
           />
         </div>
         <button
-          className="w-full py-2 text-base font-medium border-2 rounded-md cursor-pointer text-textColor bg-inherit"
+          className="w-full py-2 text-base font-medium border-2 rounded-md cursor-pointer text-textColor bg-inherit disabled:cursor-not-allowed"
           type="submit"
           disabled={
             !postData.title ||
@@ -121,7 +125,7 @@ const CreateMemory = ({ currentId, setCurrentId }) => {
             !postData.selectedFile
           }
         >
-          Submit
+          {isLoading ? "Creating..." : "Create"}
         </button>
         <button
           className="w-full py-2 text-base font-medium bg-red-600 rounded-md cursor-pointer text-textColor"
