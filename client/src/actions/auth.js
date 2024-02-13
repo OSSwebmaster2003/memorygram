@@ -1,5 +1,6 @@
 import {
   AUTH,
+  AUTH_ERROR,
   END_LOADING,
   GET_PROFILE,
   SAVE_PROFILE_INFO,
@@ -19,19 +20,25 @@ export const signin = (formData, router) => async (dispatch) => {
 
     dispatch({ type: END_LOADING });
   } catch (error) {
-    console.log(error);
+    const { message } = error.response.data;
+    dispatch({ type: AUTH_ERROR, data: message });
+    dispatch({ type: END_LOADING });
   }
 };
 
 export const signup = (formData, router) => async (dispatch) => {
   try {
-    const { data } = await api.signup(formData);
+    dispatch({ type: START_LOADING });
 
+    const { data } = await api.signup(formData);
     dispatch({ type: AUTH, data });
 
+    dispatch({ type: END_LOADING });
     router("/");
   } catch (error) {
-    console.log(error);
+    const { message } = error.response.data;
+    dispatch({ type: AUTH_ERROR, data: message });
+    dispatch({ type: END_LOADING });
   }
 };
 

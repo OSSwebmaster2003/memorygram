@@ -17,7 +17,7 @@ export const signin = async (req, res) => {
     const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
 
     if (!isPasswordCorrect)
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "Password is incorrect" });
 
     const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, {
       expiresIn: "1h",
@@ -30,13 +30,17 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const { email, password, firstName, lastName, username } = req.body;
+  const { email, password, firstName, lastName, username, confirmPassword } =
+    req.body;
 
   try {
     const oldUser = await UserModal.findOne({ email });
 
     if (oldUser)
       return res.status(400).json({ message: "User already exists" });
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "paswords are not equal" });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 12);
 

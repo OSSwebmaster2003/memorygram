@@ -20,8 +20,6 @@ const Post = ({ post, setCurrentId }) => {
   const userId = user?.result?.sub || user?.result?._id;
   const { isLoading } = useSelector((state) => state.posts);
 
-  console.log(isLoading);
-
   const openPost = () => {
     navigate(`/posts/${post._id}`);
   };

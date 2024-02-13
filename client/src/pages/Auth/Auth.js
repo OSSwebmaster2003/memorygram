@@ -25,9 +25,7 @@ const Auth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading } = useSelector((state) => state.auth);
-
-  console.log(isLoading);
+  const { isLoading, error } = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,6 +66,11 @@ const Auth = () => {
           {isSignUp ? "Sign Up" : "Sign In"}
         </h5>
         <form onSubmit={handleSubmit} autoComplete="off" className="w-full">
+          {error && (
+            <div className="w-full mt-2 mb-2 font-semibold text-center text-red-800">
+              {error}
+            </div>
+          )}
           <Grid spacing={2}>
             {isSignUp && (
               <>
