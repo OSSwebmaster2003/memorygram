@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import { commentPost } from "../../actions/posts";
+import { useNavigate } from "react-router-dom";
 
 const CommentSection = ({ post }) => {
   const [comments, setComments] = useState(post?.comments);
@@ -9,6 +10,7 @@ const CommentSection = ({ post }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
   const commentsRef = useRef();
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     const finalComment = `${user?.result?.name}: ${comment}`;
@@ -27,7 +29,12 @@ const CommentSection = ({ post }) => {
           {comments.length ? (
             comments?.map((c, i) => (
               <h4 key={i} className="ml-2 text-sm text-placeholderColor">
-                <strong className="text-buttonColor">{c.split(": ")[0]}</strong>
+                <strong
+                  className="cursor-pointer text-buttonColor"
+                  onClick={() => navigate(`/${post.username}`)}
+                >
+                  {c.split(": ")[0]}
+                </strong>
                 {c.split(":")[1]}
               </h4>
             ))

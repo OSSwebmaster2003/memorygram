@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
+import UserModal from "../models/user.js";
 
 export const getPosts = async (req, res) => {
   const { page } = req.query;
@@ -54,9 +55,12 @@ export const getPostsBySearch = async (req, res) => {
 export const createPost = async (req, res) => {
   const post = req.body;
 
+  const creatorOfPost = await UserModal.findById(req.userId);
+
   const newPostMessage = new PostMessage({
     ...post,
     creator: req.userId,
+    username: creatorOfPost.username,
     createdAt: new Date().toISOString(),
   });
 

@@ -13,5 +13,6 @@ export const END_LOADING = "ENG_LOADING";
 export const AUTH = "AUTH";
 export const GET_PROFILE = "GET_PROFILE";
 export const SAVE_PROFILE_INFO = "SAVE_PROFILE_INFO";
+export const VISIT_PROFILE_FROM_POST = "VISIT_PROFILE_FROM_POST";
 export const LOGOUT = "LOGOUT";
 export const AUTH_ERROR = "AUTH_ERROR";

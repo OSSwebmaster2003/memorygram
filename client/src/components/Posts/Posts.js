@@ -8,8 +8,9 @@ const Posts = ({ setCurrentId }) => {
   const { posts, isLoading } = useSelector((state) => state.posts);
 
   if (!posts?.length && !isLoading) {
-    return "No Posts";
+    return <div className="text-lg text-textColor">No Posts</div>;
   }
+
   return isLoading ? (
     <CircularProgress />
   ) : (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
@@ -18,7 +18,6 @@ const Post = ({ post, setCurrentId }) => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile"));
   const userId = user?.result?.sub || user?.result?._id;
-  const { isLoading } = useSelector((state) => state.posts);
 
   const openPost = () => {
     navigate(`/posts/${post._id}`);
@@ -73,7 +72,12 @@ const Post = ({ post, setCurrentId }) => {
         alt={post.title}
       />
       <div className="absolute top-5 left-5 text-textColor">
-        <h6>{post.name}</h6>
+        <h6
+          className="cursor-pointer"
+          onClick={() => navigate(`/${post.username}`)}
+        >
+          {post.username}
+        </h6>
         <Typography variant="body2">
           {moment(post.createdAt).fromNow()}
         </Typography>

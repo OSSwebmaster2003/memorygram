@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import UserModal from "../models/user.js";
+import PostMessage from "../models/postMessage.js";
 
 const secret = "test";
 
@@ -95,6 +96,11 @@ export const saveProfileInfo = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+
+    await PostMessage.updateMany(
+      { creator: user._id },
+      { username: user.username }
+    );
 
     const token = jwt.sign({ email: user.email, id: user._id }, secret, {
       expiresIn: "1h",

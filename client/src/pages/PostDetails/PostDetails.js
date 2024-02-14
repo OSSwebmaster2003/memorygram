@@ -63,7 +63,12 @@ const PostDetails = () => {
           </p>
           <h6 className="text-2xl font-medium text-textColor">
             Created by:{" "}
-            <span className="mb-3 font-bold text-buttonColor">{post.name}</span>
+            <span
+              className="mb-3 font-bold cursor-pointer text-buttonColor"
+              onClick={() => navigate(`/${post.username}`)}
+            >
+              {post.name}
+            </span>
           </h6>
           <h6 className="text-xs text-textYellow">
             {moment(post.createdAt).fromNow()}
