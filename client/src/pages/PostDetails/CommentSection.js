@@ -12,8 +12,25 @@ const CommentSection = ({ post }) => {
   const commentsRef = useRef();
   const navigate = useNavigate();
 
+  // const handleSubmit = async () => {
+  //   const finalComment = `${user?.result?.username}: ${comment}`;
+  //   const newComments = await dispatch(commentPost(finalComment, post._id));
+
+  //   setComments(newComments);
+  //   setComment("");
+
+  //   commentsRef.current.scrollIntoView({ behavior: "smooth" });
+  // };
+
   const handleSubmit = async () => {
-    const finalComment = `${user?.result?.name}: ${comment}`;
+    const finalComment = {
+      username: user?.result?.username,
+      text: comment,
+      creator: user?.result?._id,
+    };
+
+    console.log(finalComment);
+
     const newComments = await dispatch(commentPost(finalComment, post._id));
 
     setComments(newComments);
@@ -21,21 +38,23 @@ const CommentSection = ({ post }) => {
 
     commentsRef.current.scrollIntoView({ behavior: "smooth" });
   };
+
+  console.log(comments);
   return (
     <div>
       <div className="flex justify-between mt-3 mb-3">
         <div className="h-[200px] overflow-y-auto mr-7 w-[calc(100% - 440px)]">
           <h3 className="mb-3 text-2xl text-textColor">Comments</h3>
-          {comments.length ? (
+          {comments?.length ? (
             comments?.map((c, i) => (
               <h4 key={i} className="ml-2 text-sm text-placeholderColor">
                 <strong
                   className="cursor-pointer text-buttonColor"
-                  onClick={() => navigate(`/${post.username}`)}
+                  onClick={() => navigate(`/${c.username}`)}
                 >
-                  {c.split(": ")[0]}
+                  {c.username}:{" "}
                 </strong>
-                {c.split(":")[1]}
+                {c.text}
               </h4>
             ))
           ) : (

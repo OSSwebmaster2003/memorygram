@@ -67,7 +67,7 @@ const PostDetails = () => {
               className="mb-3 font-bold cursor-pointer text-buttonColor"
               onClick={() => navigate(`/${post.username}`)}
             >
-              {post.name}
+              {post.username}
             </span>
           </h6>
           <h6 className="text-xs text-textYellow">

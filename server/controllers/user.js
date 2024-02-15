@@ -102,6 +102,11 @@ export const saveProfileInfo = async (req, res) => {
       { username: user.username }
     );
 
+    await PostMessage.updateMany(
+      { "comments.creator": user._id },
+      { $set: { "comments.$.username": user.username } }
+    );
+
     const token = jwt.sign({ email: user.email, id: user._id }, secret, {
       expiresIn: "1h",
     });
