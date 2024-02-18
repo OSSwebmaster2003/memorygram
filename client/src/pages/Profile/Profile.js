@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { visitProfile } from "../../actions/auth";
+import { getPosts } from "../../actions/posts";
 
 import { CircularProgress } from "@mui/material";
 
@@ -13,6 +14,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 
 const Profile = () => {
   const { authData, isLoading } = useSelector((state) => state.auth);
+  const { posts } = useSelector((state) => state.posts);
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const dispatch = useDispatch();
@@ -22,6 +24,20 @@ const Profile = () => {
 
   const isOwnerOfProfile = user?.result?.username === username ? true : false;
 
+  const ownPosts = posts?.filter((post) => post.creator === userInfo?._id);
+  const likedPosts = posts?.filter((post) =>
+    post.likes.includes(userInfo?._id)
+  );
+
+  const handleOwnPosts = () => {
+    const dataToSend = {
+      posts: ownPosts,
+      owner: username,
+    };
+
+    navigate(`/${username}/posts`, { state: { data: dataToSend } });
+  };
+
   const tableRowWrapper =
     "flex items-center justify-start gap-[15px] mb-[10px]";
   const dialogue = "w-[100px] text-textColor text-lg font-semibold";
@@ -29,8 +45,11 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(visitProfile(username));
+    dispatch(getPosts());
     navigate(`/${username}`);
-  }, [username, dispatch, navigate]);
+
+    // eslint-disable-next-line
+  }, [username]);
 
   if (isLoading) {
     return <CircularProgress />;
@@ -100,14 +119,21 @@ const Profile = () => {
         </div>
       </div>
       <div className="flex items-center w-full justify-between gap-[50px]">
-        <div className="flex flex-col items-center justify-center cursor-pointer">
-          <h2 className="text-4xl font-medium text-textColor">15</h2>
+        <div
+          className="flex flex-col items-center justify-center cursor-pointer"
+          onClick={handleOwnPosts}
+        >
+          <h2 className="text-4xl font-medium text-textColor">
+            {ownPosts.length}
+          </h2>
           <h3 className="mt-[-10px] text-xl font-bold text-textGreen tracking-widest">
             Posts
           </h3>
         </div>
         <div className="flex flex-col items-center justify-center cursor-pointer">
-          <h2 className="text-4xl font-medium text-textColor">3</h2>
+          <h2 className="text-4xl font-medium text-textColor">
+            {likedPosts.length}
+          </h2>
           <h3 className="mt-[-10px] text-xl font-bold text-textGreen tracking-widest">
             Likes
           </h3>

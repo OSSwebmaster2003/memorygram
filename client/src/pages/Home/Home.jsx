@@ -7,12 +7,15 @@ import { Grow } from "@mui/material";
 
 import Paginate from "../../components/Pagination/Pagination";
 import Search from "../../components/Search/Search.jsx";
+import { useSelector } from "react-redux";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 const Home = ({ setCurrentId }) => {
+  const { posts } = useSelector((state) => state.posts);
+
   const [tags, setTags] = useState([]);
   const query = useQuery();
 

@@ -21,8 +21,6 @@ const Settings = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const { isLoading } = useSelector((state) => state.auth);
 
-  console.log(isLoading);
-
   const initialState = {
     username: user?.result?.username,
     firstName: user?.result?.firstName || "",

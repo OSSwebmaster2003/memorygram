@@ -9,6 +9,7 @@ import {
   COMMENT,
   START_LOADING,
   END_LOADING,
+  GET_OWN_POSTS,
 } from "../constants/actionTypes";
 import * as api from "../api";
 
@@ -116,5 +117,17 @@ export const commentPost = (value, id) => async (dispatch) => {
     return data.comments;
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+export const getOwnPosts = (username, navigate) => async (dispatch) => {
+  try {
+    const { data } = await api.getOwnPosts(username);
+
+    dispatch({ type: GET_OWN_POSTS, payload: data });
+
+    return data;
+  } catch (error) {
+    navigate("/not-found");
   }
 };

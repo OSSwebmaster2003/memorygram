@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { commentPost } from "../../actions/posts";
 import { useNavigate } from "react-router-dom";
 
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+
 const CommentSection = ({ post }) => {
   const [comments, setComments] = useState(post?.comments);
   const [comment, setComment] = useState("");
@@ -11,16 +13,6 @@ const CommentSection = ({ post }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const commentsRef = useRef();
   const navigate = useNavigate();
-
-  // const handleSubmit = async () => {
-  //   const finalComment = `${user?.result?.username}: ${comment}`;
-  //   const newComments = await dispatch(commentPost(finalComment, post._id));
-
-  //   setComments(newComments);
-  //   setComment("");
-
-  //   commentsRef.current.scrollIntoView({ behavior: "smooth" });
-  // };
 
   const handleSubmit = async () => {
     const finalComment = {
@@ -39,7 +31,6 @@ const CommentSection = ({ post }) => {
     commentsRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  console.log(comments);
   return (
     <div>
       <div className="flex justify-between mt-3 mb-3">
@@ -47,15 +38,17 @@ const CommentSection = ({ post }) => {
           <h3 className="mb-3 text-2xl text-textColor">Comments</h3>
           {comments?.length ? (
             comments?.map((c, i) => (
-              <h4 key={i} className="ml-2 text-sm text-placeholderColor">
-                <strong
-                  className="cursor-pointer text-buttonColor"
-                  onClick={() => navigate(`/${c.username}`)}
-                >
-                  {c.username}:{" "}
-                </strong>
-                {c.text}
-              </h4>
+              <div className="flex items-center justify-between w-full gap-1">
+                <h4 key={i} className="ml-2 text-sm text-placeholderColor">
+                  <strong
+                    className="cursor-pointer text-buttonColor"
+                    onClick={() => navigate(`/${c.username}`)}
+                  >
+                    {c.username}:{" "}
+                  </strong>
+                  {c.text}
+                </h4>
+              </div>
             ))
           ) : (
             <h6 className="ml-2 text-sm text-placeholderColor">

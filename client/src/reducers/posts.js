@@ -9,6 +9,7 @@ import {
   START_LOADING,
   END_LOADING,
   COMMENT,
+  GET_OWN_POSTS,
 } from "../constants/actionTypes";
 
 export default (state = { isLoading: true, posts: [] }, action) => {
@@ -59,6 +60,11 @@ export default (state = { isLoading: true, posts: [] }, action) => {
 
           return post;
         }),
+      };
+    case GET_OWN_POSTS:
+      return {
+        ...state,
+        posts: action.payload,
       };
     default:
       return state;

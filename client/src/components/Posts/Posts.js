@@ -7,6 +7,8 @@ import Post from "./Post/Post";
 const Posts = ({ setCurrentId }) => {
   const { posts, isLoading } = useSelector((state) => state.posts);
 
+  // console.log(posts);
+
   if (!posts?.length && !isLoading) {
     return <div className="text-lg text-textColor">No Posts</div>;
   }

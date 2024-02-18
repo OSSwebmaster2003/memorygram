@@ -140,3 +140,21 @@ export const commentPost = async (req, res) => {
 
   res.json(updatedPost);
 };
+
+export const getOwnPosts = async (req, res) => {
+  const { username } = req.params;
+
+  try {
+    const user = await UserModal.find({ username });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const posts = await PostMessage.find({ creator: user[0]._id });
+
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: "Code is incorrect" });
+  }
+};
