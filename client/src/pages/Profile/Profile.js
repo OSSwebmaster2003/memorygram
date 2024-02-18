@@ -38,6 +38,15 @@ const Profile = () => {
     navigate(`/${username}/posts`, { state: { data: dataToSend } });
   };
 
+  const handleLikedPosts = () => {
+    const dataToSend = {
+      posts: likedPosts,
+      owner: username,
+    };
+
+    navigate(`/${username}/likes`, { state: { data: dataToSend } });
+  };
+
   const tableRowWrapper =
     "flex items-center justify-start gap-[15px] mb-[10px]";
   const dialogue = "w-[100px] text-textColor text-lg font-semibold";
@@ -130,7 +139,10 @@ const Profile = () => {
             Posts
           </h3>
         </div>
-        <div className="flex flex-col items-center justify-center cursor-pointer">
+        <div
+          className="flex flex-col items-center justify-center cursor-pointer"
+          onClick={handleLikedPosts}
+        >
           <h2 className="text-4xl font-medium text-textColor">
             {likedPosts.length}
           </h2>

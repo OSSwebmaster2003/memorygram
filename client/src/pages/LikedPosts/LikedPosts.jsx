@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getOwnPosts } from "../../actions/posts";
+import { getLikedPosts } from "../../actions/posts";
 
-const OwnPosts = () => {
+const LikedPosts = () => {
   const { posts } = useSelector((state) => state.posts);
   const { username } = useParams();
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const OwnPosts = () => {
   };
 
   useEffect(() => {
-    dispatch(getOwnPosts(username, navigate));
+    dispatch(getLikedPosts(username, navigate));
 
     // eslint-disable-next-line
   }, [username]);
@@ -23,7 +23,7 @@ const OwnPosts = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-8">
       <h1 className="text-3xl font-bold text-textColor">
-        <span className="text-buttonColor">{username}</span> posted{" "}
+        <span className="text-buttonColor">{username}</span> liked{" "}
         <span className="text-buttonColor">{posts?.length}</span> memory
       </h1>
       {posts?.length > 0 && (
@@ -68,4 +68,4 @@ const OwnPosts = () => {
   );
 };
 
-export default OwnPosts;
+export default LikedPosts;

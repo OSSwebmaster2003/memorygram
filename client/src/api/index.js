@@ -27,6 +27,7 @@ export const likePost = (id) => API.patch(`posts/${id}/likePost`);
 export const comment = (value, id) =>
   API.post(`/posts/${id}/commentPost`, { value });
 export const getOwnPosts = (username) => API.get(`/posts/${username}/posts`);
+export const getLikedPosts = (username) => API.get(`/posts/${username}/likes`);
 
 export const signin = (formData) => API.post("/user/signin", formData);
 export const signup = (formData) => API.post("/user/signup", formData);

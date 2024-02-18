@@ -10,6 +10,7 @@ import {
   getPostsBySearch,
   commentPost,
   getOwnPosts,
+  getLikedPosts,
 } from "../controllers/posts.js";
 
 import auth from "../middleware/auth.js";
@@ -25,5 +26,6 @@ router.delete("/:id", auth, deletePost);
 router.patch("/:id/likePost", auth, likePost);
 router.post("/:id/commentPost", auth, commentPost);
 router.get("/:username/posts", getOwnPosts);
+router.get("/:username/likes", getLikedPosts);
 
 export default router;

@@ -10,6 +10,7 @@ import {
   END_LOADING,
   COMMENT,
   GET_OWN_POSTS,
+  GET_LIKED_POSTS,
 } from "../constants/actionTypes";
 
 export default (state = { isLoading: true, posts: [] }, action) => {
@@ -62,6 +63,11 @@ export default (state = { isLoading: true, posts: [] }, action) => {
         }),
       };
     case GET_OWN_POSTS:
+      return {
+        ...state,
+        posts: action.payload,
+      };
+    case GET_LIKED_POSTS:
       return {
         ...state,
         posts: action.payload,

@@ -158,3 +158,22 @@ export const getOwnPosts = async (req, res) => {
     res.status(500).json({ message: "Code is incorrect" });
   }
 };
+
+export const getLikedPosts = async (req, res) => {
+  const { username } = req.params;
+
+  try {
+    const user = await UserModal.find({ username });
+    const posts = await PostMessage.find();
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const likedPosts = posts.filter((post) => post.likes.includes(user[0]._id));
+
+    res.status(200).json(likedPosts);
+  } catch (error) {
+    res.status(500).json({ message: "Code is incorrect" });
+  }
+};

@@ -10,6 +10,7 @@ import {
   START_LOADING,
   END_LOADING,
   GET_OWN_POSTS,
+  GET_LIKED_POSTS,
 } from "../constants/actionTypes";
 import * as api from "../api";
 
@@ -125,6 +126,18 @@ export const getOwnPosts = (username, navigate) => async (dispatch) => {
     const { data } = await api.getOwnPosts(username);
 
     dispatch({ type: GET_OWN_POSTS, payload: data });
+
+    return data;
+  } catch (error) {
+    navigate("/not-found");
+  }
+};
+
+export const getLikedPosts = (username, navigate) => async (dispatch) => {
+  try {
+    const { data } = await api.getLikedPosts(username);
+
+    dispatch({ type: GET_LIKED_POSTS, payload: data });
 
     return data;
   } catch (error) {

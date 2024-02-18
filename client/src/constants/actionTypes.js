@@ -7,6 +7,7 @@ export const FETCH_POST = "FETCH_POST";
 export const FETCH_BY_SEARCH = "FETCH_BY_SEARCH";
 export const COMMENT = "COMMENT";
 export const GET_OWN_POSTS = "GET_OWN_POSTS";
+export const GET_LIKED_POSTS = "GET_LIKES_POSTS";
 
 export const START_LOADING = "START_LOADING";
 export const END_LOADING = "ENG_LOADING";
